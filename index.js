@@ -314,7 +314,7 @@ newQuoteobj = new commonFiles.newQuote();
 getDetails = new commonFiles.getDetails();
 var profileDetails = new commonFiles.profileDetails()
 var latestSN = new commonFiles.latestSN();
-app.post("/allyfulfillment", async function (req, res) {
+app.post("/fulfillment", async function (req, res) {
 
   // Service now status
   
