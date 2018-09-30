@@ -1,4 +1,4 @@
-const Twitter = require('twitter');
+//const Twitter = require('twitter');
 const Sentiment = require('sentiment');
 var express = require('express');
 var session = require('express-session')
@@ -26,186 +26,186 @@ var addressify = require('./util/addressify').checkAddressify;
 // mongoose.Promise = global.Promise;
 // const db = mongoose.connection
 
-const config = {
-  consumer_key: process.env.consumer_key,
-  consumer_secret: process.env.consumer_secret,
-  access_token_key: process.env.access_token,
-  access_token_secret: process.env.access_token_secret
-  // consumer_key: 'asdasdasdasdasdasd',
-  // consumer_secret: 'asdasdasdasdasd',
-  // access_token_key: 'asdasdasdasdasd',
-  // access_token_secret: 'asdasdasdasda'
-};
+// const config = {
+//   consumer_key: process.env.consumer_key,
+//   consumer_secret: process.env.consumer_secret,
+//   access_token_key: process.env.access_token,
+//   access_token_secret: process.env.access_token_secret
+//   // consumer_key: 'asdasdasdasdasdasd',
+//   // consumer_secret: 'asdasdasdasdasd',
+//   // access_token_key: 'asdasdasdasdasd',
+//   // access_token_secret: 'asdasdasdasda'
+// };
 
-const tweet = new Twitter(config);
+//const tweet = new Twitter(config);
 const sentiment = new Sentiment();
 
-const params = {
-  // q: '"#optus" OR "OPTUS" OR "Optus" ',
-  screen_name: 'Iamcharlotte7',
-  count: 20,
-  result_type: 'recent',
-  lang: 'en',
-  tweet_mode: 'extended'
-}
-const csparams = {
-  // q: '"#optus" OR "OPTUS" OR "Optus" ',
-  //screen_name: 'Iamcharlotte7',
-  //screen_name: 'arunprasaath_r',
-  screen_name: 'IIFLMarkets',
-  count: 20,
-  result_type: 'recent',
-  lang: 'en',
-  tweet_mode: 'extended'
-}
-const csfparams = {
-  // q: '"#optus" OR "OPTUS" OR "Optus" ',
-  //screen_name: 'Iamcharlotte7',
-  //screen_name: 'arunprasaath_r',
-  screen_name: 'IIFLMarkets',
-  count: 20,
-  result_type: 'recent',
-  lang: 'en',
-  tweet_mode: 'extended'
-}
+// const params = {
+//   // q: '"#optus" OR "OPTUS" OR "Optus" ',
+//   screen_name: 'Iamcharlotte7',
+//   count: 20,
+//   result_type: 'recent',
+//   lang: 'en',
+//   tweet_mode: 'extended'
+// }
+// const csparams = {
+//   // q: '"#optus" OR "OPTUS" OR "Optus" ',
+//   //screen_name: 'Iamcharlotte7',
+//   //screen_name: 'arunprasaath_r',
+//   screen_name: 'IIFLMarkets',
+//   count: 20,
+//   result_type: 'recent',
+//   lang: 'en',
+//   tweet_mode: 'extended'
+// }
+// const csfparams = {
+//   // q: '"#optus" OR "OPTUS" OR "Optus" ',
+//   //screen_name: 'Iamcharlotte7',
+//   //screen_name: 'arunprasaath_r',
+//   screen_name: 'IIFLMarkets',
+//   count: 20,
+//   result_type: 'recent',
+//   lang: 'en',
+//   tweet_mode: 'extended'
+// }
 
-function callTwitterFeed() {
-  return new Promise((resolve, reject) => {
-    var finalTweet = []; //search/tweets
-    tweet.get('statuses/user_timeline', params, function (err, data, response) {
-      if (!err) {
-        console.log('into twitter == ',data);
-        //resolve(data);
-        var filteredTweetArr = data.filter(function (tweetObj) {
-          var createdDate = new Date(tweetObj.created_at);
-          var todayDate = new Date();
-          var Difftime = Math.abs(todayDate.getTime() - createdDate.getTime());
-          var diffDays = Math.ceil(Difftime / (1000 * 3600 * 24));
-          tweetObj.dayDiff = diffDays;
+// function callTwitterFeed() {
+//   return new Promise((resolve, reject) => {
+//     var finalTweet = []; //search/tweets
+//     tweet.get('statuses/user_timeline', params, function (err, data, response) {
+//       if (!err) {
+//         console.log('into twitter == ',data);
+//         //resolve(data);
+//         var filteredTweetArr = data.filter(function (tweetObj) {
+//           var createdDate = new Date(tweetObj.created_at);
+//           var todayDate = new Date();
+//           var Difftime = Math.abs(todayDate.getTime() - createdDate.getTime());
+//           var diffDays = Math.ceil(Difftime / (1000 * 3600 * 24));
+//           tweetObj.dayDiff = diffDays;
 
-          return tweetObj.dayDiff <= 2;
-        });
-        // console.log(filteredTweetArr);
+//           return tweetObj.dayDiff <= 2;
+//         });
+//         // console.log(filteredTweetArr);
 
-        filteredTweetArr.forEach(element => {
+//         filteredTweetArr.forEach(element => {
 
-          var sentence = element.full_text;
-          var text = /(insurance)|(health)|(feeling)/i;
-          var validTweetChkIndex = sentence.search(text);
-          console.log('validTweetChkIndex',validTweetChkIndex);
-          if (validTweetChkIndex !== -1) {
-            finalTweet.push({
-              //'userID': 'Iamcharlotte7',
-              'userID': 'Iamcharlotte7',
-              'text': sentence,
-              'keyword': 'health',
-              'sentimentScore': sentiment.analyze(sentence)
-            });
-          }
-        });
+//           var sentence = element.full_text;
+//           var text = /(insurance)|(health)|(feeling)/i;
+//           var validTweetChkIndex = sentence.search(text);
+//           console.log('validTweetChkIndex',validTweetChkIndex);
+//           if (validTweetChkIndex !== -1) {
+//             finalTweet.push({
+//               //'userID': 'Iamcharlotte7',
+//               'userID': 'Iamcharlotte7',
+//               'text': sentence,
+//               'keyword': 'health',
+//               'sentimentScore': sentiment.analyze(sentence)
+//             });
+//           }
+//         });
 
-        // console.log(finalTweet);
+//         // console.log(finalTweet);
 
-        resolve(finalTweet);
-      } else {
-        console.log('out twitter == ',err);
-        reject(err);
-      }
-    })
-  })
-}
-function callCSTwitterFeed(twitterHandle) {
-  if(twitterHandle!='')
-  csparams.screen_name = twitterHandle;
-  return new Promise((resolve, reject) => {
-    var finalTweet = []; //search/tweets
-    tweet.get('statuses/user_timeline', csparams, function (err, data, response) {
-      if (!err) {
-        //console.log('into twitter == ',data);
-        //resolve(data);
-        var filteredTweetArr = data.filter(function (tweetObj) {
-          var createdDate = new Date(tweetObj.created_at);
-          var todayDate = new Date();
-          var Difftime = Math.abs(todayDate.getTime() - createdDate.getTime());
-          var diffDays = Math.ceil(Difftime / (1000 * 3600 * 24));
-          tweetObj.dayDiff = diffDays;
+//         resolve(finalTweet);
+//       } else {
+//         console.log('out twitter == ',err);
+//         reject(err);
+//       }
+//     })
+//   })
+// }
+// function callCSTwitterFeed(twitterHandle) {
+//   if(twitterHandle!='')
+//   csparams.screen_name = twitterHandle;
+//   return new Promise((resolve, reject) => {
+//     var finalTweet = []; //search/tweets
+//     tweet.get('statuses/user_timeline', csparams, function (err, data, response) {
+//       if (!err) {
+//         //console.log('into twitter == ',data);
+//         //resolve(data);
+//         var filteredTweetArr = data.filter(function (tweetObj) {
+//           var createdDate = new Date(tweetObj.created_at);
+//           var todayDate = new Date();
+//           var Difftime = Math.abs(todayDate.getTime() - createdDate.getTime());
+//           var diffDays = Math.ceil(Difftime / (1000 * 3600 * 24));
+//           tweetObj.dayDiff = diffDays;
 
-          return tweetObj.dayDiff <= 2;
-        });
-        // console.log(filteredTweetArr);
+//           return tweetObj.dayDiff <= 2;
+//         });
+//         // console.log(filteredTweetArr);
 
-        filteredTweetArr.forEach(element => {
+//         filteredTweetArr.forEach(element => {
 
-          var sentence = element.full_text;
-          var text = /(Bond)|(Tender offer)|(Instrument)|(Hedge fund)|(Money)|(New fund offer)|(Growth)|(stake)|(Stocks)|(NFO)|(Performance	)|(Launch)|(Market)|(Regulation)|(Buy)|(Mortgage)|(Sell)|(Retirement Plan)|(Mutual Fund)|(Financial Aid)|(Advise)|(Return on Investment)|(Advisor	RO)|(Portfolio)|(Asset)|(Manage)|(Wealth)|(Banking)|(Bank)|(Insurance)/i;
-          var validTweetChkIndex = sentence.search(text);
-          console.log('validTweetChkIndex',validTweetChkIndex);
-          if (validTweetChkIndex !== -1) {
-            finalTweet.push(element);
-          }
-        });
+//           var sentence = element.full_text;
+//           var text = /(Bond)|(Tender offer)|(Instrument)|(Hedge fund)|(Money)|(New fund offer)|(Growth)|(stake)|(Stocks)|(NFO)|(Performance	)|(Launch)|(Market)|(Regulation)|(Buy)|(Mortgage)|(Sell)|(Retirement Plan)|(Mutual Fund)|(Financial Aid)|(Advise)|(Return on Investment)|(Advisor	RO)|(Portfolio)|(Asset)|(Manage)|(Wealth)|(Banking)|(Bank)|(Insurance)/i;
+//           var validTweetChkIndex = sentence.search(text);
+//           console.log('validTweetChkIndex',validTweetChkIndex);
+//           if (validTweetChkIndex !== -1) {
+//             finalTweet.push(element);
+//           }
+//         });
 
-        // console.log(finalTweet);
-        if(finalTweet == '')
-        {
-          finalTweet = 'empty';
-        }
-        resolve(finalTweet);
-      } else {
-        finalTweet = 'empty';
-        console.log('out twitter == ',err);
-        resolve(finalTweet);
-        //reject(err);
-      }
-    })
-  })
-}
-function callCSTwitterFriends(twitterHandle) {
-  if(twitterHandle!='')
-  csfparams.screen_name = twitterHandle;
-  return new Promise((resolve, reject) => {
-    var finalTweet = []; //search/tweets
-    tweet.get('friends/list', csfparams, function (err, data, response) {
-      if (!err) {
-        //console.log('into twitter == ',data);
+//         // console.log(finalTweet);
+//         if(finalTweet == '')
+//         {
+//           finalTweet = 'empty';
+//         }
+//         resolve(finalTweet);
+//       } else {
+//         finalTweet = 'empty';
+//         console.log('out twitter == ',err);
+//         resolve(finalTweet);
+//         //reject(err);
+//       }
+//     })
+//   })
+// }
+// function callCSTwitterFriends(twitterHandle) {
+//   if(twitterHandle!='')
+//   csfparams.screen_name = twitterHandle;
+//   return new Promise((resolve, reject) => {
+//     var finalTweet = []; //search/tweets
+//     tweet.get('friends/list', csfparams, function (err, data, response) {
+//       if (!err) {
+//         //console.log('into twitter == ',data);
         
-        // var filteredTweetArr = data.filter(function (tweetObj) {
-        //   var createdDate = new Date(tweetObj.created_at);
-        //   var todayDate = new Date();
-        //   var Difftime = Math.abs(todayDate.getTime() - createdDate.getTime());
-        //   var diffDays = Math.ceil(Difftime / (1000 * 3600 * 24));
-        //   tweetObj.dayDiff = diffDays;
+//         // var filteredTweetArr = data.filter(function (tweetObj) {
+//         //   var createdDate = new Date(tweetObj.created_at);
+//         //   var todayDate = new Date();
+//         //   var Difftime = Math.abs(todayDate.getTime() - createdDate.getTime());
+//         //   var diffDays = Math.ceil(Difftime / (1000 * 3600 * 24));
+//         //   tweetObj.dayDiff = diffDays;
 
-        //   return tweetObj.dayDiff <= 2;
-        // });
-        // // console.log(filteredTweetArr);
+//         //   return tweetObj.dayDiff <= 2;
+//         // });
+//         // // console.log(filteredTweetArr);
 
-        // filteredTweetArr.forEach(element => {
+//         // filteredTweetArr.forEach(element => {
 
-        //   var sentence = element.full_text;
-        //   var text = /(Bond)|(Tender offer)|(Instrument)|(Hedge fund)|(Money)|(New fund offer)|(Growth)|(stake)|(Stocks)|(NFO)|(Performance	)|(Launch)|(Market)|(Regulation)|(Buy)|(Mortgage)|(Sell)|(Retirement Plan)|(Mutual Fund)|(Financial Aid)|(Advise)|(Return on Investment)|(Advisor	RO)|(Portfolio)|(Asset)|(Manage)|(Wealth)|(Banking)|(Bank)|(Insurance)/i;
-        //   var validTweetChkIndex = sentence.search(text);
-        //   console.log('validTweetChkIndex',validTweetChkIndex);
-        //   if (validTweetChkIndex !== -1) {
-        //     finalTweet.push(element);
-        //   }
-        // });
+//         //   var sentence = element.full_text;
+//         //   var text = /(Bond)|(Tender offer)|(Instrument)|(Hedge fund)|(Money)|(New fund offer)|(Growth)|(stake)|(Stocks)|(NFO)|(Performance	)|(Launch)|(Market)|(Regulation)|(Buy)|(Mortgage)|(Sell)|(Retirement Plan)|(Mutual Fund)|(Financial Aid)|(Advise)|(Return on Investment)|(Advisor	RO)|(Portfolio)|(Asset)|(Manage)|(Wealth)|(Banking)|(Bank)|(Insurance)/i;
+//         //   var validTweetChkIndex = sentence.search(text);
+//         //   console.log('validTweetChkIndex',validTweetChkIndex);
+//         //   if (validTweetChkIndex !== -1) {
+//         //     finalTweet.push(element);
+//         //   }
+//         // });
 
-        // console.log(finalTweet);
-        if(data == '')
-        {
-          data = 'empty';
-        }
-        resolve(data);
-      } else {
-        data = 'empty';
-        console.log('out twitter == ',err);
-        resolve(data);
-        //reject(err);
-      }
-    })
-  })
-}
+//         // console.log(finalTweet);
+//         if(data == '')
+//         {
+//           data = 'empty';
+//         }
+//         resolve(data);
+//       } else {
+//         data = 'empty';
+//         console.log('out twitter == ',err);
+//         resolve(data);
+//         //reject(err);
+//       }
+//     })
+//   })
+// }
 app = express();
 //Create express object
 
@@ -234,28 +234,28 @@ app.get("/ally", async function (req, res) {
   res.json(profile);
   
 });
-app.get("/charlesTweetFeed", async function (req, res) {
-  if(req.query.twitter != 'undefined')
-    var twitterHandle = req.query.twitter;
-  else
-    var twitterHandle = 'null'; 
-  let twitterData = await callCSTwitterFeed(twitterHandle);
-  if(twitterData == 'empty')
-    res.json({result:"empty tweet or account not found"});
-  else
-    res.json(twitterData);
-});
-app.get("/charlesTweetFriends", async function (req, res) {
-  if(req.query.twitter != 'undefined')
-    var twitterHandle = req.query.twitter;
-  else
-    var twitterHandle = 'null'; 
-  let twitterData = await callCSTwitterFriends(twitterHandle);
-  if(twitterData == 'empty')
-    res.json({result:"empty tweet or account not found"});
-  else
-    res.json(twitterData);
-});
+// app.get("/charlesTweetFeed", async function (req, res) {
+//   if(req.query.twitter != 'undefined')
+//     var twitterHandle = req.query.twitter;
+//   else
+//     var twitterHandle = 'null'; 
+//   let twitterData = await callCSTwitterFeed(twitterHandle);
+//   if(twitterData == 'empty')
+//     res.json({result:"empty tweet or account not found"});
+//   else
+//     res.json(twitterData);
+// });
+// app.get("/charlesTweetFriends", async function (req, res) {
+//   if(req.query.twitter != 'undefined')
+//     var twitterHandle = req.query.twitter;
+//   else
+//     var twitterHandle = 'null'; 
+//   let twitterData = await callCSTwitterFriends(twitterHandle);
+//   if(twitterData == 'empty')
+//     res.json({result:"empty tweet or account not found"});
+//   else
+//     res.json(twitterData);
+// });
 
 
 const readFileSession = filePath => new Promise((resolve, reject) => {
@@ -1008,81 +1008,81 @@ app.post("/allyfulfillment", async function (req, res) {
       }]
     };
     res.json(msg);
-  } else if (intentFrom == "TweetFeedDetails") {
-    console.log('```````Session ID`````````', req.body.sessionId);
-    commonFiles.writeIncompleteTran(req.body.sessionId, true, "Roaming", function (err, data) {
-      if (err) {
-        res.send({
-          speech: "Error in API response!!!",
-          displayText: ""
-        });
-      }
-      console.log(data);
-      if (data == true) {
-        res.send({
-          speech: "",
-          displayText: "",
-          followupEvent: {
-            name: "feedbackEvent"
-          }
-        });
-      } else {
-        msg = {
-          "speech": "",
-          "displayText": "",
-          "messages": [{
-            "type": 1,
-            "platform": "facebook",
-            "title": "HOME BROADBAND",
-            "subtitle": "If you're running multiple devices, part of a big family or streaming on-demand video, then Broadband & nbn™ is just the ticket for your entertainment needs!<br/><br/><br/><br/>",
-            "imageUrl": "https://smb.optus.com.au/opfiles/Shop/Consumer/Assets/Images/Broadband/broadband-NBN-landing-page-3UP.png",
-            "buttons": [{
-              "text": "Show More",
-              "postback": "https://www.optus.com.au/shop/broadband/home-broadband"
-            },
-            {
-              "text": "Select this plan",
-              "postback": "HOME BROADBAND"
-            }
-            ]
-          },
-          {
-            "type": 1,
-            "platform": "facebook",
-            "title": "HOME WIRELESS BROADBAND",
-            "subtitle": "Get connected to Australia’s Winning Mobile Network. Enjoy instant plug and play wireless broadband in your home with unlimited data options on a flexible wireless broadband plans.",
-            "imageUrl": "https://smb.optus.com.au/opfiles/Shop/Consumer/Broadband/Media/Images/HV-18-HWBB-3UP.jpg",
-            "buttons": [{
-              "text": "Show More",
-              "postback": "https://www.optus.com.au/shop/broadband/home-wireless-broadband"
-            },
-            {
-              "text": "Select this plan",
-              "postback": "HOME WIRELESS BROADBAND"
-            }
-            ]
-          },
-          {
-            "type": 1,
-            "platform": "facebook",
-            "title": "MOBILE BROADBAND",
-            "subtitle": "If you're on the road, study remotely or need to keep the kids entertained in the car, you can stay connected on the move with Mobile Broadband.<br/><br/><br/><br/>",
-            "imageUrl": "https://smb.optus.com.au/opfiles/Shop/Consumer/Broadband/Media/Images/tile-mobile-broadband.jpg",
-            "buttons": [{
-              "text": "Show More",
-              "postback": "https://www.optus.com.au/shop/broadband/mobile-broadband"
-            },
-            {
-              "text": "Select this plan",
-              "postback": "MOBILE BROADBAND"
-            }
-            ]
-          }
-          ]
-        };
-      }
-      return res.json(msg);
-    });
+  // } else if (intentFrom == "TweetFeedDetails") {
+  //   console.log('```````Session ID`````````', req.body.sessionId);
+  //   commonFiles.writeIncompleteTran(req.body.sessionId, true, "Roaming", function (err, data) {
+  //     if (err) {
+  //       res.send({
+  //         speech: "Error in API response!!!",
+  //         displayText: ""
+  //       });
+  //     }
+  //     console.log(data);
+  //     if (data == true) {
+  //       res.send({
+  //         speech: "",
+  //         displayText: "",
+  //         followupEvent: {
+  //           name: "feedbackEvent"
+  //         }
+  //       });
+  //     } else {
+  //       msg = {
+  //         "speech": "",
+  //         "displayText": "",
+  //         "messages": [{
+  //           "type": 1,
+  //           "platform": "facebook",
+  //           "title": "HOME BROADBAND",
+  //           "subtitle": "If you're running multiple devices, part of a big family or streaming on-demand video, then Broadband & nbn™ is just the ticket for your entertainment needs!<br/><br/><br/><br/>",
+  //           "imageUrl": "https://smb.optus.com.au/opfiles/Shop/Consumer/Assets/Images/Broadband/broadband-NBN-landing-page-3UP.png",
+  //           "buttons": [{
+  //             "text": "Show More",
+  //             "postback": "https://www.optus.com.au/shop/broadband/home-broadband"
+  //           },
+  //           {
+  //             "text": "Select this plan",
+  //             "postback": "HOME BROADBAND"
+  //           }
+  //           ]
+  //         },
+  //         {
+  //           "type": 1,
+  //           "platform": "facebook",
+  //           "title": "HOME WIRELESS BROADBAND",
+  //           "subtitle": "Get connected to Australia’s Winning Mobile Network. Enjoy instant plug and play wireless broadband in your home with unlimited data options on a flexible wireless broadband plans.",
+  //           "imageUrl": "https://smb.optus.com.au/opfiles/Shop/Consumer/Broadband/Media/Images/HV-18-HWBB-3UP.jpg",
+  //           "buttons": [{
+  //             "text": "Show More",
+  //             "postback": "https://www.optus.com.au/shop/broadband/home-wireless-broadband"
+  //           },
+  //           {
+  //             "text": "Select this plan",
+  //             "postback": "HOME WIRELESS BROADBAND"
+  //           }
+  //           ]
+  //         },
+  //         {
+  //           "type": 1,
+  //           "platform": "facebook",
+  //           "title": "MOBILE BROADBAND",
+  //           "subtitle": "If you're on the road, study remotely or need to keep the kids entertained in the car, you can stay connected on the move with Mobile Broadband.<br/><br/><br/><br/>",
+  //           "imageUrl": "https://smb.optus.com.au/opfiles/Shop/Consumer/Broadband/Media/Images/tile-mobile-broadband.jpg",
+  //           "buttons": [{
+  //             "text": "Show More",
+  //             "postback": "https://www.optus.com.au/shop/broadband/mobile-broadband"
+  //           },
+  //           {
+  //             "text": "Select this plan",
+  //             "postback": "MOBILE BROADBAND"
+  //           }
+  //           ]
+  //         }
+  //         ]
+  //       };
+  //     }
+  //     return res.json(msg);
+  //   });
   } else if (intentFrom == "HomeInsurance-yes") {
     console.log("testerter");
     msg = {
