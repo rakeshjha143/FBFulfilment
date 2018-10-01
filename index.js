@@ -106,6 +106,8 @@ app.post("/fulfillment", async function (req, res) {
   var smsContent = '';
   var resp = commonFiles.WelcomeMsg();
   var msg = '';
+  
+  // Input.welcome -----------
   if (intentFrom === 'input.welcome' ) {
     msg = {
       "speech": "",
@@ -119,6 +121,39 @@ app.post("/fulfillment", async function (req, res) {
     };
     return res.json(msg);
   }
+  /* End Input.welcome*/
+  else if(intentFrom === 'input.glassClaim') {
+    msg = {
+      "messages":[{
+        "type":0,
+        "platform":"facebook",
+        "speech":"Sorry about that. We'll help you get this claim sorted out in no time."
+      },
+      {
+        "type":4,
+        "platform":"facebook",
+        "payload":{
+          "facebook":{
+            "text":"Is it related to your Auto, Home or Businessowners policy?",
+            "quick_replies":[{
+              "content_type":"text",
+              "title":"Auto",
+              "payload":"Auto"
+            },{
+              "content_type":"text",
+              "title":"Home",
+              "payload":"Home"
+            },{
+              "content_type":"text",
+              "title":"Business",
+              "payload":"BusinessOwners"
+            }]
+          }
+        }
+      }
+    ]};
+  }
+
 });
 //POST Call Endpoint
 
