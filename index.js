@@ -151,6 +151,18 @@ app.post("/fulfillment", async function (req, res) {
       }
     ]};
     return res.json(msg);
+  } else if(intentFrom === 'input.policy') {
+    msg = {
+      "speech": "",
+      "displayText": "",
+      "messages": [{
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Thanks for the details! Please hold on, while we check your coverage details <br> Happy to inform that your broken window is covered under your Homeowners policy <br> We'll need some more information to help you with the claim processing <br> When did the accident occur ? example It happened on 31st Aug / Yesterday / Today / Day"
+      }]
+      
+    };
+    return res.json(msg);
   }
   
 });
