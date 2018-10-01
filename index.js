@@ -160,7 +160,7 @@ app.post("/fulfillment", async function (req, res) {
       "messages": [{
         "type": 0,
         "platform": "facebook",
-        "speech": "<p class='list-group-item-text-bot'><p>Thanks for the details! Please hold on, while we check your coverage details </p> <p>Happy to inform that your broken window is covered under your Homeowners policy </p><p> We'll need some more information to help you with the claim processing </p><p>When did the accident occur ? example It happened on 31st Aug / Yesterday / Today / Day</p></p>"
+        "speech": "Thanks for the details! Please hold on, while we check your coverage details <br>Happy to inform that your broken window is covered under your Homeowners policy <br> We'll need some more information to help you with the claim processing <br>When did the accident occur ? example It happened on 31st Aug / Yesterday / Today / Day"
       }]
       
     };
