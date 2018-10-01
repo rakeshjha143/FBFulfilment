@@ -133,7 +133,7 @@ app.post("/fulfillment", async function (req, res) {
         "payload":{
           "facebook":{
             "text":"Is it related to your Auto, Home or Businessowners policy?",
-            "quick_replies":[{
+            "quick_replies_img":[{
               "content_type":"text",
               "title":"Auto",
               "payload":"Auto"
