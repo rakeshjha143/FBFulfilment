@@ -136,15 +136,18 @@ app.post("/fulfillment", async function (req, res) {
             "quick_replies_img":[{
               "content_type":"text",
               "title":"Auto",
-              "payload":"Auto"
+              "payload":"Auto",
+              "image_url":"avatar/image/Auto.svg"
             },{
               "content_type":"text",
               "title":"Home",
-              "payload":"Home"
+              "payload":"Home",
+              "image_url":"avatar/image/Home.svg"
             },{
               "content_type":"text",
               "title":"Business",
-              "payload":"BusinessOwners"
+              "payload":"BusinessOwners",
+              "image_url":"avatar/image/Business.svg"
             }]
           }
         }
@@ -158,7 +161,7 @@ app.post("/fulfillment", async function (req, res) {
       "messages": [{
         "type": 0,
         "platform": "facebook",
-        "speech": "<p>Thanks for the details! Please hold on, while we check your coverage details </p> <p>Happy to inform that your broken window is covered under your Homeowners policy </p><p> We'll need some more information to help you with the claim processing </p><p>When did the accident occur ? example It happened on 31st Aug / Yesterday / Today / Day</p>"
+        "speech": '<p>Thanks for the details! Please hold on, while we check your coverage details </p> <p>Happy to inform that your broken window is covered under your Homeowners policy </p><p> We'll need some more information to help you with the claim processing </p><p>When did the accident occur ? example It happened on 31st Aug / Yesterday / Today / Day</p>"
       }]
       
     };
