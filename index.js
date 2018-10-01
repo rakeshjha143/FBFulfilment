@@ -120,9 +120,7 @@ app.post("/fulfillment", async function (req, res) {
       
     };
     return res.json(msg);
-  }
-  /* End Input.welcome*/
-  else if(intentFrom === 'input.glassClaim') {
+  } else if(intentFrom === 'input.glassClaim') {
     msg = {
       "messages":[{
         "type":0,
@@ -152,8 +150,9 @@ app.post("/fulfillment", async function (req, res) {
         }
       }
     ]};
+    return res.json(msg);
   }
-
+  
 });
 //POST Call Endpoint
 
