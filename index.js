@@ -207,9 +207,108 @@ app.post("/fulfillment", async function (req, res) {
           "type": 2,
           "platform": "facebook",
           "title": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
-          "replies": [
-            "Single Hung"
-          ]
+          "quick_replies": [
+            {
+                          "content_type":"text",
+                          "title":"Single Hung",
+                          "payload":"Single Hung",
+                          "selected":true
+              },
+            {
+                          "content_type":"text",
+                          "title":"Double Hung",
+                          "payload":"Double Hung"
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Arched",
+                          "payload":"Arched"
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Bay",
+                          "payload":"Bay",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Bow",
+                          "payload":"Bow",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Casement",
+                          "payload":"Casement",
+                       
+              },{
+                          "content_type":"text",
+                          "title":"Egress",
+                          "payload":"Egress",
+                       
+              },{
+                          "content_type":"text",
+                          "title":"Garden",
+                          "payload":"Garden",
+                       
+              },{
+                          "content_type":"text",
+                          "title":"Glass Block",
+                          "payload":"Glass Block",
+                       
+              },{
+                          "content_type":"text",
+                          "title":"Hopper",
+                          "payload":"Hopper",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Jalousie",
+                          "payload":"Jalousie",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Picture",
+                          "payload":"Picture",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Round Circle",
+                          "payload":"Round Circle",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Skylight",
+                          "payload":"Skylight",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Sliding",
+                          "payload":"Sliding",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Storm",
+                          "payload":"Storm",
+                       
+              },
+            {
+                          "content_type":"text",
+                          "title":"Transom",
+                          "payload":"Transom",
+                       
+              }
+                       
+                      ]
+            
         }
       ]
   
@@ -227,9 +326,69 @@ app.post("/fulfillment", async function (req, res) {
         "type": 2,
         "platform": "facebook",
         "title": "Can you validate the type of glass? You can select another one if the suggested glass type is not correct",
-        "replies": [
-          "Float Glass"
-        ]
+        "quick_replies": [
+          {
+                        "content_type":"text",
+                        "title":"Float Glass",
+                        "payload":"Float Glass",
+                        "selected":true
+            },
+          {
+                        "content_type":"text",
+                        "title":"Safety Laminated Glass",
+                        "payload":"Safety Laminated Glass"
+                     
+            },
+          {
+                        "content_type":"text",
+                        "title":"Obscured Glass",
+                        "payload":"Obscured Glass"
+                     
+            },
+          {
+                        "content_type":"text",
+                        "title":"Annealed Glass",
+                        "payload":"Annealed Glass",
+                     
+            },
+          {
+                        "content_type":"text",
+                        "title":"Tinted Glass",
+                        "payload":"Tinted Glass",
+                     
+            },
+          {
+                        "content_type":"text",
+                        "title":"Tempered Glass",
+                        "payload":"Tempered Glass",
+                     
+            },{
+                        "content_type":"text",
+                        "title":"Insulated Glass",
+                        "payload":"Insulated Glass",
+                     
+            },{
+                        "content_type":"text",
+                        "title":"Mirrored Glass",
+                        "payload":"Mirrored Glass",
+                     
+            },{
+                        "content_type":"text",
+                        "title":"Low-E Glass",
+                        "payload":"Low-E Glass",
+                     
+            },{
+                        "content_type":"text",
+                        "title":"Wired Glass",
+                        "payload":"Wired Glass",
+                     
+            },
+          {
+                        "content_type":"text",
+                        "title":"Heat Strengthened Glass",
+                        "payload":"Heat Strengthened Glass",
+                     
+            }]
       }
     ]
 
