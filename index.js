@@ -188,9 +188,9 @@ return new Promise((resolve, reject) => {
     return resolve(claimno);
     } else {
     return reject(error);
-   }    */
+   }    
       
-});
+});*/
 });
 }
 app.post("/fulfillment", async function (req, res) {
