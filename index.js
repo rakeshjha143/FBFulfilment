@@ -88,6 +88,21 @@ newQuoteobj = new commonFiles.newQuote();
 getDetails = new commonFiles.getDetails();
 var profileDetails = new commonFiles.profileDetails()
 var latestSN = new commonFiles.latestSN();
+  
+var claimno;
+var lossDate;
+var lossType;
+var lossCause;
+var description;
+var price;
+var height;
+var width;
+var thickness;
+var glassType;
+var windowType;
+var gSize; 
+ 
+
 app.post("/fulfillment", async function (req, res) {
 
   // Service now status
@@ -166,9 +181,11 @@ app.post("/fulfillment", async function (req, res) {
     };
     return res.json(msg);
   }
-  
+ 
+  else if(intentFrom === 'input.date') {
 
-  else if(intentFrom === 'upload_image') {
+    lossDate=intentParam.date;
+    console.log(lossDate);
     msg = {
       "speech": "",
       "displayText": "",
@@ -180,25 +197,30 @@ app.post("/fulfillment", async function (req, res) {
       
     };
     return res.json(msg);
-  }else if(intentFrom === 'input.damaged') {
-    msg = {
-  
-    "messages": [
-     
-      {
-        "type": 2,
-        "platform": "facebook",
-        "title": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
-        "replies": [
-          "Single Hung"
-        ]
-      }
-    ]
+  }
 
-    }
+  else if(intentFrom === 'upload_image') {
+    msg = {"speech": "Hold on for a moment while we get the details of the damaged glass",
+    "messages": [
+       
+        {
+          "type": 2,
+          "platform": "facebook",
+          "title": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
+          "replies": [
+            "Single Hung"
+          ]
+        }
+      ]
+  
+      };
     return res.json(msg);
   }
+ 
+  
   else if(intentFrom === 'input.windows') {
+    windowType=intentParam.Windows;
+    console.log(windowType);
     msg = {"speech": "",
     "messages": [
            {
@@ -214,6 +236,51 @@ app.post("/fulfillment", async function (req, res) {
     }
     return res.json(msg);
   }
+  else if(intentFrom === 'input.sizeOfglass') {
+    windowType=intentParam.Windows;
+    console.log(windowType);
+    msg = {
+      "speech": "",
+      "displayText": "",
+      "messages": [{
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Input the correct size of the glass; Height (in cm) x Width (in cm) x Thickness (in mm)"
+      }]
+      
+    };
+    return res.json(msg);
+  }
+  
+
+  else if(intentFrom === 'input.GlassSize') {
+    gSize=intentParam.GlassSize;
+    console.log(gSize);
+    var price={};
+   // claimno=CreateClaim(req,res);
+  // price=priceConverter(req,res);
+   console.log("claimno Jha"+claimno);
+   console.log("Rakkesh Jha"+price);
+  //if(price!=null){
+   msg={
+      "speech": "",
+       "displayText": "",
+       "messages": [{
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Your Claim number is CL  "+claimno
+      },{
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Based on the quotes received from the market, you are entitled to a claims payment of "+price+
+        ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
+      }]
+      
+    };
+  
+    return res.json(msg);
+  }
+
   else if(intentFrom === 'input.OtherOptionRes') {
     msg = {
       "speech": "",
@@ -243,6 +310,7 @@ app.post("/fulfillment", async function (req, res) {
     ]};
     return res.json(msg);
   }
+  
 });
 //POST Call Endpoint
 
