@@ -300,7 +300,7 @@ app.post("/fulfillment", async function (req, res) {
           "platform": "facebook",
           "payload":{
             "facebook":{
-          "title": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
+          "text": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
           "quick_replies": [
             {
                           "content_type":"text",
