@@ -6,6 +6,7 @@ var session = require('express-session')
 //const mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var requestAPI = require('request');
+const image2base64 = require('image-to-base64');
 //const uuidv1 = require('uuid/v1');
 //const nodemailer = require('nodemailer');
 //let fs = require('fs');
@@ -291,6 +292,38 @@ app.post("/fulfillment", async function (req, res) {
   }
 
   else if(intentFrom === 'upload_image') {
+    
+    image2base64("https://www.houseofisabella.co.uk/images/products/zoom/1536825948-93271100.jpg") // you can also to use url
+        .then(
+            (response) => {
+                console.log(response); //cGF0aC90by9maWxlLmpwZw==
+                var options = { method: 'POST',
+                url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/a5f70573-9fd1-470d-9ebb-bc5e69bb00a8/image',
+                qs: 
+                 { iterationId: '9feb5eb3-2e44-46ca-a134-7e9cae8a4188',
+                   '': '',
+                   'Prediction-Key': '89480c97ae7f461cac92611f97e2e64c' },
+                headers: 
+                 { 'postman-token': '279cdba6-b68c-f0eb-f59e-9436f5368c64',
+                   'cache-control': 'no-cache',
+                   'content-type': 'application/octet-stream' } ,
+
+                 body: response
+                  };
+
+               requestAPI(options, function (error, response, body) {
+                if (error) throw new Error(error);
+              
+                console.log(body);
+              });
+              
+            }
+        )
+        .catch(
+            (error) => {
+                console.log(error); //Exepection error....
+            }
+        )
     msg = {
     "messages": [
       {
@@ -551,7 +584,18 @@ app.post("/fulfillment", async function (req, res) {
   
     
   }
-
+  else if(intentFrom === 'otherOption') {
+    msg={
+    "speech": "",
+    "displayText": "",
+    "messages": [{
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Oh Yes.<br><br>We can get the glazing repaired for you <br><br> which would take 2 weeks to complete. <br><br>Alternatively, you can send us a quote from a glazier and we'll pay out the claim"
+    }]
+    };
+    return res.json(msg);
+    } 
   else if(intentFrom === 'input.OtherOptionRes') {
     msg = {
       "speech": "",
@@ -564,7 +608,7 @@ app.post("/fulfillment", async function (req, res) {
           "text":"Please select an option for us to proceed further",
           "quick_replies_img":[{
             "content_type":"text",
-            "title":"Cash Payment of USD",
+            "title":"Cash Payment of USD"+ price,
             "payload":"Cash Payment of USD"
           },{
             "content_type":"text",
