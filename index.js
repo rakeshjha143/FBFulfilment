@@ -288,12 +288,18 @@ app.post("/fulfillment", async function (req, res) {
   }
 
   else if(intentFrom === 'upload_image') {
-    msg = {"speech": "Hold on for a moment while we get the details of the damaged glass",
+    msg = {
     "messages": [
-       
+      {
+      "type": 0,
+      "platform": "facebook",
+      "speech": "Hold on for a moment while we get the details of the damaged glass"
+      },
         {
           "type": 4,
           "platform": "facebook",
+          "payload":{
+            "facebook":{
           "title": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
           "quick_replies": [
             {
@@ -397,7 +403,7 @@ app.post("/fulfillment", async function (req, res) {
                        
                       ]
             
-        }
+        }}}
       ]
   
       };
@@ -414,6 +420,8 @@ app.post("/fulfillment", async function (req, res) {
         "type": 4,
         "platform": "facebook",
         "title": "Can you validate the type of glass? You can select another one if the suggested glass type is not correct",
+        "payload":{
+          "facebook":{
         "quick_replies": [
           {
                         "content_type":"text",
@@ -477,7 +485,7 @@ app.post("/fulfillment", async function (req, res) {
                         "payload":"Heat Strengthened Glass",
                      
             }]
-      }
+      }}}
     ]
 
     }
