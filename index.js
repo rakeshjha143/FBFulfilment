@@ -7,6 +7,7 @@ var session = require('express-session')
 var bodyParser = require('body-parser');
 var requestAPI = require('request');
 const image2base64 = require('image-to-base64');
+const roundTo = require('round-to');
 //const uuidv1 = require('uuid/v1');
 //const nodemailer = require('nodemailer');
 //let fs = require('fs');
@@ -123,8 +124,8 @@ requestAPI(options, function (error, response, body) {
   if (!error && response.statusCode === 200) {
     
     var validprice= body;
-    price=validprice.glassCost
-    console.log(validprice.glassCost); 
+    price=roundTo(validprice.glassCost, 2);
+    console.log(price); 
      return resolve(price);
      } else {
      return reject(error);
