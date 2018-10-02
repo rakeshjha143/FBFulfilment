@@ -414,14 +414,14 @@ app.post("/fulfillment", async function (req, res) {
   else if(intentFrom === 'input.windows') {
     windowType=intentParam.Windows;
     console.log(windowType);
-    msg = {"speech": "",
+    msg = {
     "messages": [
            {
         "type": 4,
         "platform": "facebook",
-        "title": "Can you validate the type of glass? You can select another one if the suggested glass type is not correct",
         "payload":{
-          "facebook":{
+        "facebook":{
+        "title": "Can you validate the type of glass? You can select another one if the suggested glass type is not correct",  
         "quick_replies": [
           {
                         "content_type":"text",
