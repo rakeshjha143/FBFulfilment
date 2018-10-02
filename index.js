@@ -523,6 +523,8 @@ app.post("/fulfillment", async function (req, res) {
               await priceConverter(req,res).then((price) => {
                 console.log("Claim Number"+price);
                           msg={
+                            "speech": "",
+                            "displayText": "",
                              "messages": [{
                               "type": 0,
                               "platform": "facebook",
@@ -539,7 +541,7 @@ app.post("/fulfillment", async function (req, res) {
                         });
                       
                         
-        }}));
+        }});
    
   //if(price!=null){
    
