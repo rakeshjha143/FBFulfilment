@@ -104,6 +104,7 @@ var windowType;
 var gSize; 
 
 async function priceConverter(req,res){
+  console.log("glassType: "+glassType+"windowType: "+windowType)
   var options = { method: 'POST',
   url: 'http://35.154.116.87:7999/aa/getMockGlassCost',
   headers: 
@@ -533,8 +534,8 @@ app.post("/fulfillment", async function (req, res) {
     return res.json(msg);
   }
   else if(intentFrom === 'input.sizeOfglass') {
-    windowType=intentParam.Windows;
-    console.log(windowType);
+    glassType=intentParam.GlassType;
+    console.log(glassType); 
     msg = {
       "speech": "",
       "displayText": "",
