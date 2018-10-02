@@ -299,7 +299,7 @@ app.post("/fulfillment", async function (req, res) {
           "type": 4,
           "platform": "facebook",
           "payload":{
-            "facebook":{
+          "facebook":{
           "text": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
           "quick_replies": [
             {
@@ -414,8 +414,7 @@ app.post("/fulfillment", async function (req, res) {
   else if(intentFrom === 'input.windows') {
     windowType=intentParam.Windows;
     console.log(windowType);
-    msg = {
-    "messages": [
+    msg = {"messages": [
            {
         "type": 4,
         "platform": "facebook",
@@ -517,12 +516,10 @@ app.post("/fulfillment", async function (req, res) {
     await CreateClaim(req,res.then(async (claimno) => {
       
             if(claimno){
-      
+             console.log("Claim Number"+claimno);
               await priceConverter(req,res).then((price) => {
-                
+                console.log("Claim Number"+price);
                           msg={
-                            "speech": "",
-                             "displayText": "",
                              "messages": [{
                               "type": 0,
                               "platform": "facebook",
