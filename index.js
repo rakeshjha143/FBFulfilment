@@ -293,7 +293,7 @@ app.post("/fulfillment", async function (req, res) {
 
   else if(intentFrom === 'upload_image') {
     
-    image2base64("https://www.houseofisabella.co.uk/images/products/zoom/1536825948-93271100.jpg") // you can also to use url
+    image2base64("http://www.reallifewithceliacdisease.com/image/2018/02/08/curved-window-design-ideas-arched-bookcases-arched-windows-design-ideas-bay-window_95a04a09abc7fc89.jpg") // you can also to use url
         .then(
             (response) => {
                 console.log(response); //cGF0aC90by9maWxlLmpwZw==
@@ -342,102 +342,103 @@ app.post("/fulfillment", async function (req, res) {
                           "content_type":"text",
                           "title":"Single Hung",
                           "payload":"Single Hung",
-                          "selected":true
+                       "selected":true
               },
             {
                           "content_type":"text",
-                          "title":"Double Hung",
-                          "payload":"Double Hung"
+                          "title":"Double Hung Windows",
+                          "payload":"Double Hung Windows"
                        
               },
             {
                           "content_type":"text",
-                          "title":"Arched",
-                          "payload":"Arched"
+                          "title":"Arched Windows",
+                          "payload":"Arched Windows"
                        
               },
             {
                           "content_type":"text",
-                          "title":"Bay",
-                          "payload":"Bay",
+                          "title":"Bay Windows",
+                          "payload":"Bay Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Bow",
-                          "payload":"Bow",
+                          "title":"Bow Windows",
+                          "payload":"Bow Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Casement",
-                          "payload":"Casement",
+                          "title":"Casement Windows",
+                          "payload":"Casement Windows",
                        
               },{
                           "content_type":"text",
-                          "title":"Egress",
-                          "payload":"Egress",
+                          "title":"Egress Windows",
+                          "payload":"Egress Windows",
                        
               },{
                           "content_type":"text",
-                          "title":"Garden",
-                          "payload":"Garden",
+                          "title":"Garden Windows",
+                          "payload":"Garden Windows",
                        
               },{
                           "content_type":"text",
-                          "title":"Glass Block",
-                          "payload":"Glass Block",
+                          "title":"Glass Block Windows",
+                          "payload":"Glass Block Windows",
                        
               },{
                           "content_type":"text",
-                          "title":"Hopper",
-                          "payload":"Hopper",
+                          "title":"Hopper Windows",
+                          "payload":"Hopper Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Jalousie",
-                          "payload":"Jalousie",
+                          "title":"Jalousie Windows",
+                          "payload":"Jalousie Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Picture",
-                          "payload":"Picture",
+                          "title":"Picture Windows",
+                          "payload":"Picture Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Round Circle",
-                          "payload":"Round Circle",
+                          "title":"Round Circle Windows",
+                          "payload":"Round Circle Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Skylight",
-                          "payload":"Skylight",
+                          "title":"Skylight Windows",
+                          "payload":"Skylight Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Sliding",
-                          "payload":"Sliding",
+                          "title":"Sliding Windows",
+                          "payload":"Sliding Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Storm",
-                          "payload":"Storm",
+                          "title":"Storm Windows",
+                          "payload":"Storm Windows",
                        
               },
             {
                           "content_type":"text",
-                          "title":"Transom",
-                          "payload":"Transom",
+                          "title":"Transom Windows",
+                          "payload":"Transom Windows",
                        
               }
                        
                       ]
+            
             
         }}}
       ]
