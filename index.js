@@ -306,9 +306,10 @@ app.post("/fulfillment", async function (req, res) {
                 headers: 
                  { 'postman-token': '279cdba6-b68c-f0eb-f59e-9436f5368c64',
                    'cache-control': 'no-cache',
-                   'content-type': 'application/octet-stream' } ,
-
-                 body: response
+                   'content-type': 'application/octet-stream',
+                   'body': response
+                  } 
+                    
                   };
 
                requestAPI(options, function (error, response, body) {
