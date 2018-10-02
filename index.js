@@ -553,8 +553,6 @@ app.post("/fulfillment", async function (req, res) {
   else if(intentFrom === 'input.GlassSize') {
     gSize=intentParam.GlassSize;
     console.log(gSize);
-    var price={};
-         
          
     await CreateClaim(req,res).then(async (claimno) => {
       
