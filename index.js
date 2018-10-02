@@ -516,7 +516,7 @@ app.post("/fulfillment", async function (req, res) {
     var price={};
          
          
-    await CreateClaim(req,res.then(async (claimno) => {
+    await CreateClaim(req,res).then(async (claimno) => {
       
             if(claimno){
              console.log("Claim Number"+claimno);
