@@ -164,13 +164,13 @@ async function CreateClaim(req,res)
 
      params:
 
-      [ { lossDate: '2018-09-27T00:00:00Z',
-
-          lossType: 'PR',
-
-          lossCause: 'glassbreakage',
-
-          description: 'windowcrashed' } ] },
+     [ { lossDate: lossDate+'T00:00:00Z',
+     
+               lossType: 'PR',
+     
+               lossCause: glassType,
+     
+               description: windowType } ] },
 
   json: true };
 
@@ -294,7 +294,7 @@ app.post("/fulfillment", async function (req, res) {
 
   else if(intentFrom === 'upload_image') {
     
-    image2base64("http://www.reallifewithceliacdisease.com/image/2018/02/08/curved-window-design-ideas-arched-bookcases-arched-windows-design-ideas-bay-window_95a04a09abc7fc89.jpg") // you can also to use url
+   /* image2base64("http://www.reallifewithceliacdisease.com/image/2018/02/08/curved-window-design-ideas-arched-bookcases-arched-windows-design-ideas-bay-window_95a04a09abc7fc89.jpg") // you can also to use url
         .then(
             (response) => {
                 console.log(response); //cGF0aC90by9maWxlLmpwZw==
@@ -326,7 +326,7 @@ app.post("/fulfillment", async function (req, res) {
             (error) => {
                 console.log(error); //Exepection error....
             }
-        )
+        )*/
     msg = {
     "messages": [
       {
