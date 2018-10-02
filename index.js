@@ -414,7 +414,14 @@ app.post("/fulfillment", async function (req, res) {
   else if(intentFrom === 'input.windows') {
     windowType=intentParam.Windows;
     console.log(windowType);
+<<<<<<< HEAD
     msg = {"messages": [
+=======
+    msg = {
+      "speech": "",
+    "displayText": "",
+    "messages": [
+>>>>>>> 2e2a92dacb5a5bc1845e2bf006a74ff5390ed38b
            {
         "type": 4,
         "platform": "facebook",
