@@ -114,8 +114,8 @@ async function priceConverter(req,res){
    { height: 70,
      width: 30,
      thickness: 33,
-     glassType: 'Safety Laminated Glass',
-     windowType: 'Double Hung Windows' },
+     glassType: glassType,
+     windowType: windowType},
   json: true };
 return new Promise((resolve, reject) => {
 requestAPI(options, function (error, response, body) {
