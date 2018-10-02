@@ -117,7 +117,7 @@ async function priceConverter(req,res){
      windowType: 'Double Hung Windows' },
   json: true };
 return new Promise((resolve, reject) => {
-request(options, function (error, response, body) {
+requestAPI(options, function (error, response, body) {
   if (!error && response.statusCode === 200) {
     
     var validprice= body;
@@ -174,7 +174,7 @@ async function CreateClaim(req,res)
 
  
 return new Promise((resolve, reject) => {
-request(options, function (error, response, body) {
+  requestAPI(options, function (error, response, body) {
   console.log('2------------',body);
   //if (error) throw new Error(error);
 
