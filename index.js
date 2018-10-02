@@ -415,6 +415,8 @@ app.post("/fulfillment", async function (req, res) {
     windowType=intentParam.Windows;
     console.log(windowType);
     msg = {
+      "speech": "",
+    "displayText": "",
     "messages": [
            {
         "type": 4,
