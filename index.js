@@ -137,7 +137,7 @@ requestAPI(options, function (error, response, body) {
 }
 async function CreateClaim(req,res)
 {
- console.log('inside create claim------------',req);
+ console.log('inside create claim------------');
   var options = { method: 'POST',
      
   url: 'http://35.154.116.87:8080/cc/service/edge/fnol/cfnol',
@@ -174,9 +174,12 @@ async function CreateClaim(req,res)
 
  
 return new Promise((resolve, reject) => {
-requestAPI(options, function (error, response, body) {
+  console.log("Inside promise") ;
+  return resolve("000-00-000255");
+ 
+/*requestAPI(options, function (error, response, body) {
   console.log('2------------',body);
-  //if (error) throw new Error(error);
+ if (error) throw new Error(error);
 
   if (!error && response.statusCode === 200) {
    
@@ -185,7 +188,7 @@ requestAPI(options, function (error, response, body) {
     return resolve(claimno);
     } else {
     return reject(error);
-   }    
+   }    */
       
 });
 });
