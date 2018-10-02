@@ -167,8 +167,86 @@ app.post("/fulfillment", async function (req, res) {
     return res.json(msg);
   }
   
+
+  else if(intentFrom === 'upload_image') {
+    msg = {
+      "speech": "",
+      "displayText": "",
+      "messages": [{
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Please upload the picture of the damaged glass?"
+      }]
+      
+    };
+    return res.json(msg);
+  }else if(intentFrom === 'input.damaged') {
+    msg = {
+  
+    "messages": [
+     
+      {
+        "type": 2,
+        "platform": "facebook",
+        "title": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
+        "replies": [
+          "Single Hung"
+        ]
+      }
+    ]
+
+    }
+    return res.json(msg);
+  }
+  else if(intentFrom === 'input.windows') {
+    msg = {"speech": "",
+    "messages": [
+           {
+        "type": 2,
+        "platform": "facebook",
+        "title": "Can you validate the type of glass? You can select another one if the suggested glass type is not correct",
+        "replies": [
+          "Float Glass"
+        ]
+      }
+    ]
+
+    }
+    return res.json(msg);
+  }
+  else if(intentFrom === 'input.OtherOptionRes') {
+    msg = {
+      "speech": "",
+      "displayText": "",
+      "messages": [{  
+      "type":4,
+      "platform":"facebook",
+      "payload":{
+        "facebook":{
+          "text":"Please select an option for us to proceed further",
+          "quick_replies_img":[{
+            "content_type":"text",
+            "title":"Cash Payment of USD",
+            "payload":"Cash Payment of USD"
+          },{
+            "content_type":"text",
+            "title":"2 weeks repair",
+            "payload":"2 weeks repair"
+          },{
+            "content_type":"text",
+            "title":"Self Quotes",
+            "payload":"Self Quotes"
+          }]
+        }
+      }
+    }
+    ]};
+    return res.json(msg);
+  }
 });
 //POST Call Endpoint
+
+
 
 app.get("/test", async function (req, res) {
   var type = 'GETPLAN';
