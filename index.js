@@ -101,8 +101,95 @@ var thickness;
 var glassType;
 var windowType;
 var gSize; 
- 
 
+async function priceConverter(req,res){
+  var options = { method: 'POST',
+  url: 'http://35.154.116.87:7999/aa/getMockGlassCost',
+  headers: 
+   { 'postman-token': '225193bc-ade0-bb34-6a7e-b6e8851b7c3b',
+     'cache-control': 'no-cache',
+     'content-type': 'application/json' },
+  body: 
+   { height: 70,
+     width: 30,
+     thickness: 33,
+     glassType: 'Safety Laminated Glass',
+     windowType: 'Double Hung Windows' },
+  json: true };
+return new Promise((resolve, reject) => {
+request(options, function (error, response, body) {
+  if (!error && response.statusCode === 200) {
+    
+    var validprice= body;
+    price=validprice.glassCost
+    console.log(validprice.glassCost); 
+     return resolve(price);
+     } else {
+     return reject(error);
+    }    
+  
+ 
+});
+  }
+)
+
+  
+}
+async function CreateClaim(req,res)
+{
+  //console.log('inside create claim------------',req);
+  var options = { method: 'POST',
+     
+  url: 'http://35.154.116.87:8080/cc/service/edge/fnol/cfnol',
+
+  headers:
+
+   { 'postman-token': 'ff149a5b-daaf-0000-0b8c-5301c162be75',
+
+     'cache-control': 'no-cache',
+
+     authorization: 'Basic c3U6Z3c=',
+
+     accept: 'application/json',
+
+     'content-type': 'application/json' },
+
+  body:
+
+   { jsonrpc: '2.0',
+
+     method: 'createClaimForHomeOwners',
+
+     params:
+
+      [ { lossDate: '2018-09-27T00:00:00Z',
+
+          lossType: 'PR',
+
+          lossCause: 'glassbreakage',
+
+          description: 'windowcrashed' } ] },
+
+  json: true };
+
+ 
+return new Promise((resolve, reject) => {
+request(options, function (error, response, body) {
+  console.log('2------------',body);
+  //if (error) throw new Error(error);
+
+  if (!error && response.statusCode === 200) {
+   
+    claimno = body.result;
+      console.log(claimno); 
+    return resolve(claimno);
+    } else {
+    return reject(error);
+   }    
+      
+});
+});
+}
 app.post("/fulfillment", async function (req, res) {
 
   // Service now status
@@ -121,6 +208,7 @@ app.post("/fulfillment", async function (req, res) {
   var smsContent = '';
   var resp = commonFiles.WelcomeMsg();
   var msg = '';
+ 
   
   // Input.welcome -----------
   if (intentFrom === 'input.welcome' ) {
@@ -204,7 +292,7 @@ app.post("/fulfillment", async function (req, res) {
     "messages": [
        
         {
-          "type": 2,
+          "type": 4,
           "platform": "facebook",
           "title": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
           "quick_replies": [
@@ -323,7 +411,7 @@ app.post("/fulfillment", async function (req, res) {
     msg = {"speech": "",
     "messages": [
            {
-        "type": 2,
+        "type": 4,
         "platform": "facebook",
         "title": "Can you validate the type of glass? You can select another one if the suggested glass type is not correct",
         "quick_replies": [
@@ -416,28 +504,39 @@ app.post("/fulfillment", async function (req, res) {
     gSize=intentParam.GlassSize;
     console.log(gSize);
     var price={};
-   // claimno=CreateClaim(req,res);
-  // price=priceConverter(req,res);
-   console.log("claimno Jha"+claimno);
-   console.log("Rakkesh Jha"+price);
-  //if(price!=null){
-   msg={
-      "speech": "",
-       "displayText": "",
-       "messages": [{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "Your Claim number is CL  "+claimno
-      },{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "Based on the quotes received from the market, you are entitled to a claims payment of "+price+
-        ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
-      }]
+         
+         
+    await CreateClaim(req,res.then(async (claimno) => {
       
-    };
+            if(claimno){
+      
+              await priceConverter(req,res).then((price) => {
+                
+                          msg={
+                            "speech": "",
+                             "displayText": "",
+                             "messages": [{
+                              "type": 0,
+                              "platform": "facebook",
+                              "speech": "Your Claim number is CL  "+claimno
+                            },{
+                              "type": 0,
+                              "platform": "facebook",
+                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of "+price+
+                              ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
+                            }]
+                            
+                          };
+                          return res.json(msg);
+                        });
+                      
+                        
+        }}));
+   
+  //if(price!=null){
+   
   
-    return res.json(msg);
+    
   }
 
   else if(intentFrom === 'input.OtherOptionRes') {
