@@ -281,7 +281,15 @@ app.post("/fulfillment", async function (req, res) {
       "messages": [{
         "type": 0,
         "platform": "facebook",
-        "speech": "Thanks for the details! Please hold on, while we check your coverage details <br><br>Happy to inform that your broken window is covered under your Homeowners policy <br><br> We'll need some more information to help you with the claim processing <br><br>When did the accident occur ? example It happened on 31st Aug / Yesterday / Today / Day"
+        "speech": "Thanks for the details! Please hold on, while we check your coverage details "
+      },{
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Happy to inform that your broken window is covered under your Homeowners policy <br><br> We'll need some more information to help you with the claim processing "
+      },{
+        "type": 0,
+        "platform": "facebook",
+        "speech": "When did the accident occur ? eg- It happened on 31st Aug / Yesterday / Today"
       }]
       
     };
@@ -532,7 +540,7 @@ app.post("/fulfillment", async function (req, res) {
       "messages": [{
         "type": 0,
         "platform": "facebook",
-        "speech": "Input the correct size of the glass; Height (in cm) x Width (in cm) x Thickness (in mm)"
+        "speech": "Input the correct size of the glass; eg- Height (in cm) x Width (in cm) x Thickness (in mm)"
       }]
       
     };
@@ -560,7 +568,7 @@ app.post("/fulfillment", async function (req, res) {
                             },{
                               "type": 0,
                               "platform": "facebook",
-                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of "+price+
+                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $ "+price+
                               ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
                             }]
                             
@@ -600,7 +608,7 @@ app.post("/fulfillment", async function (req, res) {
           "text":"Please select an option for us to proceed further",
           "quick_replies_img":[{
             "content_type":"text",
-            "title":"Cash Payment of USD"+ price,
+            "title":"Cash Payment "+ price,
             "payload":"Cash Payment of USD"
           },{
             "content_type":"text",
