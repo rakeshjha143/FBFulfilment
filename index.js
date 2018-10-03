@@ -106,7 +106,7 @@ var gSize;
 
 function checkItem(query,message){
   message.messages[0].payload.facebook.quick_replies.forEach((item) => {
-      if(item.title.toLowerCase().indexOf(query.toLowerCase()) > -1){
+      if(item.title==query){
           item.selected = true;
       } else {
           delete item.selected;
