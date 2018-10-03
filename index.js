@@ -104,6 +104,17 @@ var glassType;
 var windowType;
 var gSize; 
 
+function checkItem(query,message){
+  message.messages[1].payload.facebook.quick_replies.forEach((item) => {
+      if(item.title.toLowerCase().indexOf(query.toLowerCase()) > -1){
+          item.selected = true;
+      } else {
+          delete item.selected;
+      }
+  });
+  return message;
+}
+
 async function priceConverter(req,res){
   console.log("glassType: "+glassType+"windowType: "+windowType)
   var options = { method: 'POST',
@@ -420,6 +431,7 @@ app.post("/fulfillment", async function (req, res) {
       ]
   
       };
+      msg=await checkItem(windowType,msg);
     return res.json(msg);
   }
  
@@ -427,6 +439,8 @@ app.post("/fulfillment", async function (req, res) {
   else if(intentFrom === 'input.windows') {
     windowType=intentParam.Windows;
     console.log(windowType);
+    glassType=intentParam.GlassType;
+    console.log(glassType);
     msg = {
       "speech": "",
     "displayText": "",
@@ -504,6 +518,7 @@ app.post("/fulfillment", async function (req, res) {
     ]
 
     }
+    msg=await checkItem(glassType,msg);
     return res.json(msg);
   }
   else if(intentFrom === 'input.sizeOfglass') {
