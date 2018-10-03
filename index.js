@@ -169,9 +169,9 @@ async function CreateClaim(req,res)
      
                lossType: 'PR',
      
-               lossCause: glassType,
+               lossCause: 'glassbreakage',
      
-               description: windowType } ] },
+               description: 'windowcrashed' } ] },
 
   json: true };
 
@@ -182,7 +182,7 @@ return new Promise((resolve, reject) => {
  
 requestAPI(options, function (error, response, body) {
   console.log('2------------',body);
- if (error) throw new Error(error);
+ 
 
   if (!error && response.statusCode === 200) {
    
