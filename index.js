@@ -105,7 +105,7 @@ var windowType;
 var gSize; 
 
 function checkItem(query,message){
-  message.messages[1].payload.facebook.quick_replies.forEach((item) => {
+  message.messages[0].payload.facebook.quick_replies.forEach((item) => {
       if(item.title.toLowerCase().indexOf(query.toLowerCase()) > -1){
           item.selected = true;
       } else {
@@ -136,7 +136,7 @@ requestAPI(options, function (error, response, body) {
   if (!error && response.statusCode === 200) {
     
     var validprice= body;
-    price=roundTo(validprice.glassCost, 2);
+    price=roundTo(validprice.glassCost, 0);
     console.log(price); 
      return resolve(price);
      } else {
@@ -243,17 +243,19 @@ app.post("/fulfillment", async function (req, res) {
     return res.json(msg);
   } else if(intentFrom === 'input.glassClaim') {
     msg = {
-      "messages":[{
+      "speech": "",
+      "displayText": "",
+      "messages":[/*{
         "type":0,
         "platform":"facebook",
         "speech":"Sorry about that. We'll help you get this claim sorted out in no time."
-      },
+      },*/
       {
         "type":4,
         "platform":"facebook",
         "payload":{
           "facebook":{
-            "text":"Is it related to your Auto, Home or Businessowners policy?",
+            "text":"Is it related to glass claim to your Auto, Home or Businessowners policy?",
             "quick_replies_img":[{
               "content_type":"text",
               "title":"Auto",
@@ -289,7 +291,7 @@ app.post("/fulfillment", async function (req, res) {
       },{
         "type": 0,
         "platform": "facebook",
-        "speech": "When did the accident occur ? eg- It happened on 31st Aug / Yesterday / Today"
+        "speech": "When did the accident occur ? eg: 31st Aug / Yesterday / Today"
       }]
       
     };
@@ -529,7 +531,7 @@ app.post("/fulfillment", async function (req, res) {
     }
     //msg=await checkItem(glassType,msg);
     console.log("Before check Item");
-    return res.json(msg);
+    return res.json(checkItem(glassType,msg));
   }
   else if(intentFrom === 'input.sizeOfglass') {
     glassType=intentParam.GlassType;
@@ -568,7 +570,7 @@ app.post("/fulfillment", async function (req, res) {
                             },{
                               "type": 0,
                               "platform": "facebook",
-                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $ "+price+
+                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $"+price+
                               ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
                             }]
                             
@@ -608,7 +610,7 @@ app.post("/fulfillment", async function (req, res) {
           "text":"Please select an option for us to proceed further",
           "quick_replies_img":[{
             "content_type":"text",
-            "title":"Cash Payment "+ price,
+            "title":"Cash Payment $"+ price,
             "payload":"Cash Payment of USD"
           },{
             "content_type":"text",
