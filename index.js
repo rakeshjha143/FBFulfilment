@@ -319,7 +319,8 @@ app.post("/fulfillment", async function (req, res) {
    
     windowType=intentParam.WindowType;
     console.log("#####"+windowType);
-        
+    glassType=intentParam.ClaimGlassType;
+    console.log(glassType);    
         
     msg = {
     "messages": [
@@ -448,10 +449,10 @@ app.post("/fulfillment", async function (req, res) {
  
   
   else if(intentFrom === 'input.windows') {
+    console.log(intentParam);
     windowType=intentParam.Windows;
     console.log(windowType);
-    glassType=intentParam.ClaimGlassType;
-    console.log(glassType);
+    
     msg = {
       "speech": "",
     "displayText": "",
