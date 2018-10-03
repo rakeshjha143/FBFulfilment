@@ -112,6 +112,7 @@ function checkItem(query,message){
           delete item.selected;
       }
   });
+  console.log("Before send");
   return message;
 }
 
@@ -308,8 +309,7 @@ app.post("/fulfillment", async function (req, res) {
    
     windowType=intentParam.WindowType;
     console.log("#####"+windowType);
-   
-       
+        
         
     msg = {
     "messages": [
@@ -431,7 +431,8 @@ app.post("/fulfillment", async function (req, res) {
       ]
   
       };
-      msg=await checkItem(windowType,msg);
+      //msg=await checkItem(windowType,msg);
+      console.log("Before check Item");
     return res.json(msg);
   }
  
@@ -518,7 +519,8 @@ app.post("/fulfillment", async function (req, res) {
     ]
 
     }
-    msg=await checkItem(glassType,msg);
+    //msg=await checkItem(glassType,msg);
+    console.log("Before check Item");
     return res.json(msg);
   }
   else if(intentFrom === 'input.sizeOfglass') {
