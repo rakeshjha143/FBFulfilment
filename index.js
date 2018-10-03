@@ -295,40 +295,10 @@ app.post("/fulfillment", async function (req, res) {
 
   else if(intentFrom === 'upload_image') {
    
-    
-   /* image2base64("http://www.reallifewithceliacdisease.com/image/2018/02/08/curved-window-design-ideas-arched-bookcases-arched-windows-design-ideas-bay-window_95a04a09abc7fc89.jpg") // you can also to use url
-        .then(
-            (response) => {
-                console.log(response); //cGF0aC90by9maWxlLmpwZw==
-                var options = { method: 'POST',
-                url: 'https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/a5f70573-9fd1-470d-9ebb-bc5e69bb00a8/image',
-                qs: 
-                 { iterationId: '9feb5eb3-2e44-46ca-a134-7e9cae8a4188',
-                   '': '',
-                   'Prediction-Key': '89480c97ae7f461cac92611f97e2e64c' },
-                headers: 
-                 { 'postman-token': '279cdba6-b68c-f0eb-f59e-9436f5368c64',
-                   'cache-control': 'no-cache',
-                   'content-type': 'application/octet-stream',
-                   
-                  },
-                  'body': response
-                    
-                  };
-
-               requestAPI(options, function (error, response, body) {
-                if (error) throw new Error(error);
-              
-                console.log(body);
-              });
-              
-            }
-        )
-        .catch(
-            (error) => {
-                console.log(error); //Exepection error....
-            }
-        )*/
+    windowType=intentParam.WindowType;
+    console.log("#####"+windowType);
+   
+       
         
     msg = {
     "messages": [
@@ -346,9 +316,9 @@ app.post("/fulfillment", async function (req, res) {
           "quick_replies": [
             {
                           "content_type":"text",
-                          "title":"Single Hung",
-                          "payload":"Single Hung",
-                       "selected":true
+                          "title":"Single Hung Windows",
+                          "payload":"Single Hung Windows",
+                          "selected":true
               },
             {
                           "content_type":"text",
