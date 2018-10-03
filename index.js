@@ -450,7 +450,7 @@ app.post("/fulfillment", async function (req, res) {
   else if(intentFrom === 'input.windows') {
     windowType=intentParam.Windows;
     console.log(windowType);
-    glassType=intentParam.GlassType;
+    glassType=intentParam.ClaimGlassType;
     console.log(glassType);
     msg = {
       "speech": "",
