@@ -178,9 +178,9 @@ async function CreateClaim(req,res)
  
 return new Promise((resolve, reject) => {
   console.log("Inside promise") ;
-  return resolve("000-00-000255");
+  //return resolve("000-00-000255");
  
-/*requestAPI(options, function (error, response, body) {
+requestAPI(options, function (error, response, body) {
   console.log('2------------',body);
  if (error) throw new Error(error);
 
@@ -193,7 +193,7 @@ return new Promise((resolve, reject) => {
     return reject(error);
    }    
       
-});*/
+});
 });
 }
 app.post("/fulfillment", async function (req, res) {
@@ -294,6 +294,7 @@ app.post("/fulfillment", async function (req, res) {
   }
 
   else if(intentFrom === 'upload_image') {
+   
     
    /* image2base64("http://www.reallifewithceliacdisease.com/image/2018/02/08/curved-window-design-ideas-arched-bookcases-arched-windows-design-ideas-bay-window_95a04a09abc7fc89.jpg") // you can also to use url
         .then(
@@ -328,6 +329,7 @@ app.post("/fulfillment", async function (req, res) {
                 console.log(error); //Exepection error....
             }
         )*/
+        
     msg = {
     "messages": [
       {
