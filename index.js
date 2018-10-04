@@ -237,13 +237,28 @@ app.post("/fulfillment", async function (req, res) {
     msg = {
       "speech": "",
       "displayText": "",
-      "messages": [{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "Hello. I'm Macy! How can help you today? Enter your question below and I'll help you find the information you need"
-      }]
-      
-    };
+      "messages":[
+      {
+        "type":4,
+        "platform":"facebook",
+        "payload":{
+          "facebook":{
+            "text":"Hi John. Do you want to make a claim for your glass breakage ?",
+            "quick_replies_img":[{
+              "content_type":"text",
+              "title":"Yes",
+              "payload":"Yes"
+            },
+            {
+              "content_type":"text",
+              "title":"No",
+              "payload":"No"
+            }
+          ]
+          }
+        }
+      }
+    ]};
     return res.json(msg);
   } else if(intentFrom === 'input.glassClaim') {
     msg = {
