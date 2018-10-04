@@ -262,15 +262,13 @@ app.post("/fulfillment", async function (req, res) {
   }
   else if (intentFrom === 'input.Underwriting' ) {
     msg ={
-      "speech": "",
-      "displayText": "",
-      "messages": [{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "Hello, I'm Macy!<br><br>How can I help you today?<br><br>Enter your question below and I'll help you find the information you need."
-      }]
-      
-    };
+      "messages": [
+        {
+          "type": 0,
+          "platform": "facebook",
+          "speech": "Hello, I'm Macy!<br><br>How can I help you today?<br><br>Enter your question below and I'll help you find the information you need."
+           }]
+          }
     return res.json(msg);
   }
   else if (intentFrom === 'input.welcome' ) {
@@ -693,7 +691,29 @@ app.post("/fulfillment", async function (req, res) {
                               "platform": "facebook",
                               "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $ "+price+
                               ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
-                            }]
+                            },{
+                              "type": 4,
+                              "platform": "facebook",
+                              "payload":{
+                              "facebook":{
+                              "text": "Do you want to know of  other repair options?",
+                              "quick_replies": [
+                                {
+                                              "content_type":"text",
+                                              "title":"Yes",
+                                              "payload":"Yes"
+                                              
+                                  },{
+                                    "content_type":"text",
+                                    "title":"No",
+                                    "payload":"No"
+                                    
+                        }
+                                
+                                ]}}
+                        
+                      }
+                          ]
                             
                           };
                           return res.json(msg);
