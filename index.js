@@ -232,7 +232,34 @@ app.post("/fulfillment", async function (req, res) {
   var msg = '';
  
   
-  // Input.welcome -----------
+  if (intentFrom === 'input.claimwelcome' ) {
+    msg = {
+      "speech": "",
+      "displayText": "",
+      "messages":[
+      {
+        "type":4,
+        "platform":"facebook",
+        "payload":{
+          "facebook":{
+            "text":"What do you need assitance with?",
+            "quick_replies":[{
+              "content_type":"text",
+              "title":"Underwriting",
+              "payload":"Underwriting"
+            },
+            {
+              "content_type":"text",
+              "title":"Claims",
+              "payload":"Claims"
+            }
+          ]
+          }
+        }
+      }
+    ]};
+    return res.json(msg);
+  }
   if (intentFrom === 'input.welcome' ) {
     msg = {
       "speech": "",
@@ -297,23 +324,34 @@ app.post("/fulfillment", async function (req, res) {
     //"image_url":"avatar/image/Auto.svg"
   } else if(intentFrom === 'input.policy') {
     msg = {
-      "speech": "",
-      "displayText": "",
-      "messages": [{
+      "messages": [
+        {
         "type": 0,
         "platform": "facebook",
-        "speech": "Thanks for the details! Please hold on, while we check your coverage details "
-      },{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "Happy to inform that your broken window is covered under your Homeowners policy <br><br> We'll need some more information to help you with the claim processing "
-      },{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "When did the accident occur ? eg: 31st Aug / Yesterday / Today"
-      }]
+        "speech": "Happy to inform that your broken window is covered under your Homeowners policy"
+        },
+          {
+            "type": 4,
+            "platform": "facebook",
+            "payload":{
+            "facebook":{
+            "text": "When did the incident occur? Select from below or enter in MM/DD/YYYY format",
+            "quick_replies": [
+              {
+                            "content_type":"text",
+                            "title":"Today",
+                            "payload":"Today"
+                            
+                },{
+                  "content_type":"text",
+                  "title":"Yesterday",
+                  "payload":"Yesterday"
+                  
+      }
+              
+              ]}}
       
-    };
+    }]};
     return res.json(msg);
   }
  
@@ -342,17 +380,13 @@ app.post("/fulfillment", async function (req, res) {
     console.log(glassType);    
         
     msg = {
-    "messages": [
-      {
-      "type": 0,
-      "platform": "facebook",
-      "speech": "Hold on for a moment while we get the details of the damaged glass"
-      },
-        {
-          "type": 4,
-          "platform": "facebook",
-          "payload":{
-          "facebook":{
+      "speech": "",
+    "displayText": "",
+    "messages": [{
+        "type": 4,
+        "platform": "facebook",
+        "payload":{
+        "facebook":{
           "text": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
           "quick_replies": [
             {
@@ -576,7 +610,7 @@ app.post("/fulfillment", async function (req, res) {
             "platform": "facebook",
             "payload":{
             "facebook":{
-            "text": "Input the correct size of the glass; eg- Height (in cm) x Width (in cm) x Thickness (in mm)",
+            "text": "Select the correct size of the glass or enter as Height (inch) x Width (inch) x Thickness (mm)",
             "quick_replies": [
               {
                 "content_type":"text",
@@ -644,7 +678,7 @@ app.post("/fulfillment", async function (req, res) {
                             },{
                               "type": 0,
                               "platform": "facebook",
-                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $"+price+
+                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $ "+price+
                               ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
                             }]
                             
@@ -684,12 +718,12 @@ app.post("/fulfillment", async function (req, res) {
           "text":"Please select an option for us to proceed further",
           "quick_replies_img":[{
             "content_type":"text",
-            "title":"Cash Payment $"+ price,
-            "payload":"Cash Payment of USD"
+            "title":"Cash Payment",
+            "payload":"Cash Payment"
           },{
             "content_type":"text",
-            "title":"2 weeks repair",
-            "payload":"2 weeks repair"
+            "title":"Repair",
+            "payload":"Repair"
           },{
             "content_type":"text",
             "title":"Self Quotes",
