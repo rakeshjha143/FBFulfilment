@@ -537,16 +537,61 @@ app.post("/fulfillment", async function (req, res) {
   else if(intentFrom === 'input.sizeOfglass') {
     glassType=intentParam.GlassType;
     console.log(glassType); 
+    // msg = {
+    //   "speech": "",
+    //   "displayText": "",
+    //   "messages": [{
+    //     "type": 0,
+    //     "platform": "facebook",
+    //     "speech": "Input the correct size of the glass; eg- Height (in cm) x Width (in cm) x Thickness (in mm)"
+    //   }]
+      
+    // };
     msg = {
       "speech": "",
-      "displayText": "",
-      "messages": [{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "Input the correct size of the glass; eg- Height (in cm) x Width (in cm) x Thickness (in mm)"
-      }]
-      
-    };
+    "displayText": "",
+      "messages": [
+        
+          {
+            "type": 4,
+            "platform": "facebook",
+            "payload":{
+            "facebook":{
+            "text": "Input the correct size of the glass; eg- Height (in cm) x Width (in cm) x Thickness (in mm)",
+            "quick_replies": [
+              {
+                            "content_type":"text",
+                            "title":"120*45*10",
+                            "payload":"120*45*10"
+                },
+              {
+                            "content_type":"text",
+                            "title":"40*60*6",
+                            "payload":"40*60*6"
+                         
+                },
+              {
+                            "content_type":"text",
+                            "title":"30*40*6",
+                            "payload":"30*40*6"
+                         
+                },
+              {
+                            "content_type":"text",
+                            "title":"60*80*6",
+                            "payload":"60*80*6",
+                         
+                }
+                         
+                        ]
+              
+              
+          }}}
+        ]
+    
+        };
+        //msg=await checkItem(windowType,msg);
+    //    console.log("Before check Item");
     return res.json(msg);
   }
   
