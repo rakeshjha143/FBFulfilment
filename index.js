@@ -244,7 +244,7 @@ app.post("/fulfillment", async function (req, res) {
         "payload":{
           "facebook":{
             "text":"Hi John. Do you want to make a claim for your glass breakage ?",
-            "quick_replies_img":[{
+            "quick_replies":[{
               "content_type":"text",
               "title":"Yes",
               "payload":"Yes"
