@@ -245,14 +245,15 @@ app.post("/fulfillment", async function (req, res) {
             "text":"What do you need assitance with?",
             "quick_replies":[{
               "content_type":"text",
-              "title":"Underwriting",
-              "payload":"Underwriting"
+              "title":"Claims",
+              "payload":"Claims"
+           
             },
             {
               "content_type":"text",
-              "title":"Claims",
-              "payload":"Claims"
-            }
+              "title":"Underwriting",
+              "payload":"Underwriting"
+               }
           ]
           }
         }
@@ -288,7 +289,7 @@ app.post("/fulfillment", async function (req, res) {
         "platform":"facebook",
         "payload":{
           "facebook":{
-            "text":"Hi John. Do you want to make a claim for your glass breakage ?",
+            "text":"Do you want to make a claim for your glass breakage ?",
             "quick_replies":[{
               "content_type":"text",
               "title":"Yes",
@@ -696,7 +697,7 @@ app.post("/fulfillment", async function (req, res) {
                             },{
                               "type": 0,
                               "platform": "facebook",
-                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $ "+price+
+                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $"+price+
                               ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
                             },{
                               "type": 4,
