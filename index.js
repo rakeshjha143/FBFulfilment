@@ -232,7 +232,34 @@ app.post("/fulfillment", async function (req, res) {
   var msg = '';
  
   
-  // Input.welcome -----------
+  if (intentFrom === 'input.claimwelcome' ) {
+    msg = {
+      "speech": "",
+      "displayText": "",
+      "messages":[
+      {
+        "type":4,
+        "platform":"facebook",
+        "payload":{
+          "facebook":{
+            "text":"What do you need assitance with?",
+            "quick_replies":[{
+              "content_type":"text",
+              "title":"Underwriting",
+              "payload":"Underwriting"
+            },
+            {
+              "content_type":"text",
+              "title":"Claims",
+              "payload":"Claims"
+            }
+          ]
+          }
+        }
+      }
+    ]};
+    return res.json(msg);
+  }
   if (intentFrom === 'input.welcome' ) {
     msg = {
       "speech": "",
@@ -651,7 +678,7 @@ app.post("/fulfillment", async function (req, res) {
                             },{
                               "type": 0,
                               "platform": "facebook",
-                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $"+price+
+                              "speech": "Based on the quotes received from the market, you are entitled to a claims payment of $ "+price+
                               ". We've added an additional 10% to the market rates to cover any additional expenses that you may incur. "
                             }]
                             
@@ -691,12 +718,12 @@ app.post("/fulfillment", async function (req, res) {
           "text":"Please select an option for us to proceed further",
           "quick_replies_img":[{
             "content_type":"text",
-            "title":"Cash Payment $"+ price,
-            "payload":"Cash Payment of USD"
+            "title":"Cash Payment",
+            "payload":"Cash Payment"
           },{
             "content_type":"text",
-            "title":"2 weeks repair",
-            "payload":"2 weeks repair"
+            "title":"Repair",
+            "payload":"Repair"
           },{
             "content_type":"text",
             "title":"Self Quotes",
