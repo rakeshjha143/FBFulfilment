@@ -215,7 +215,7 @@ requestAPI(options, function (error, response, body) {
 app.post("/fulfillment", async function (req, res) {
 
   // Service now status
-  
+  console.log("req", JSON.stringify(req));
   console.log("body", JSON.stringify(req.body));
   console.log(JSON.stringify(req.body.result.action));
   var sessionId = req.body.sessionId;
