@@ -121,6 +121,7 @@ function checkItem(query,message){
 
 async function priceConverter(req,res){
   console.log("glassType: "+glassType+"windowType: "+windowType)
+  console.log("h: "+h+"w: "+w+"t: "+t)
   var options = { method: 'POST',
   url: 'http://35.154.116.87:7999/aa/getMockGlassCost',
   headers: 
