@@ -741,8 +741,31 @@ app.post("/fulfillment", async function (req, res) {
     "messages": [{
     "type": 0,
     "platform": "facebook",
-    "speech": "Oh Yes.<br><br>We can get the glazing repaired for you <br><br> which would take 2 weeks to complete. <br><br>Alternatively, you can send us a quote from a glazier and we'll pay out the claim"
-    }]
+    "speech": "We can get the glazing repaired for you, which would take 2 weeks to complete <br><br>Alternatively, you can send us a quote from a glazier and we'll pay out the claim"
+    },{
+      "type": 4,
+      "platform": "facebook",
+      "payload":{
+      "facebook":{
+      "text": "Please select an option for us to proceed further",
+      "quick_replies_img":[{
+        "content_type":"text",
+        "title":"Cash Payment",
+        "payload":"Cash Payment"
+      },{
+        "content_type":"text",
+        "title":"Repair",
+        "payload":"Repair"
+      },{
+        "content_type":"text",
+        "title":"Self Quotes",
+        "payload":"Self Quotes"
+      }]}}
+
+}
+  
+  ]
+
     };
     return res.json(msg);
     } 
