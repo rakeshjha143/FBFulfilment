@@ -260,7 +260,20 @@ app.post("/fulfillment", async function (req, res) {
     ]};
     return res.json(msg);
   }
-  if (intentFrom === 'input.welcome' ) {
+  else if (intentFrom === 'input.Underwriting' ) {
+    msg ={
+      "speech": "",
+      "displayText": "",
+      "messages": [{
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Hello, I'm Macy!<br><br>How can I help you today?<br><br>Enter your question below and I'll help you find the information you need."
+      }]
+      
+    };
+    return res.json(msg);
+  }
+  else if (intentFrom === 'input.welcome' ) {
     msg = {
       "speech": "",
       "displayText": "",
