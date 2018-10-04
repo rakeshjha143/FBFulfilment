@@ -564,28 +564,34 @@ app.post("/fulfillment", async function (req, res) {
             "text": "Input the correct size of the glass; eg- Height (in cm) x Width (in cm) x Thickness (in mm)",
             "quick_replies": [
               {
-                            "content_type":"text",
-                            "title":"120*45*10",
-                            "payload":"120*45*10"
-                },
-              {
-                            "content_type":"text",
-                            "title":"40*60*6",
-                            "payload":"40*60*6"
-                         
-                },
-              {
-                            "content_type":"text",
-                            "title":"30*40*6",
-                            "payload":"30*40*6"
-                         
-                },
-              {
-                            "content_type":"text",
-                            "title":"60*80*6",
-                            "payload":"60*80*6",
-                         
-                }
+                "content_type":"text",
+                "title":"24*24*6",
+                "payload":"24*24*6"
+    },
+  {
+                "content_type":"text",
+                "title":"36*36*6",
+                "payload":"36*36*6"
+             
+    },
+  {
+                "content_type":"text",
+                "title":"24*36*4",
+                "payload":"24*36*4"
+             
+    },
+  {
+                "content_type":"text",
+                "title":"48*48*6",
+                "payload":"48*48*6",
+             
+    },
+    {
+                "content_type":"text",
+                "title":"36*48*6",
+                "payload":"36*48*6",
+   
+}
                          
                         ]
               
