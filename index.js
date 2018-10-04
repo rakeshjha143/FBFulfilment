@@ -297,23 +297,34 @@ app.post("/fulfillment", async function (req, res) {
     //"image_url":"avatar/image/Auto.svg"
   } else if(intentFrom === 'input.policy') {
     msg = {
-      "speech": "",
-      "displayText": "",
-      "messages": [{
+      "messages": [
+        {
         "type": 0,
         "platform": "facebook",
-        "speech": "Thanks for the details! Please hold on, while we check your coverage details "
-      },{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "Happy to inform that your broken window is covered under your Homeowners policy <br><br> We'll need some more information to help you with the claim processing "
-      },{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "When did the accident occur ? eg: 31st Aug / Yesterday / Today"
-      }]
+        "speech": "Happy to inform that your broken window is covered under your Homeowners policy"
+        },
+          {
+            "type": 4,
+            "platform": "facebook",
+            "payload":{
+            "facebook":{
+            "text": "When did the incident occur? Select from below or enter in MM/DD/YYYY format",
+            "quick_replies": [
+              {
+                            "content_type":"text",
+                            "title":"Today",
+                            "payload":"Today"
+                            
+                },{
+                  "content_type":"text",
+                  "title":"Yesterday",
+                  "payload":"Yesterday"
+                  
+      }
+              
+              ]}}
       
-    };
+    }]};
     return res.json(msg);
   }
  
@@ -342,17 +353,13 @@ app.post("/fulfillment", async function (req, res) {
     console.log(glassType);    
         
     msg = {
-    "messages": [
-      {
-      "type": 0,
-      "platform": "facebook",
-      "speech": "Hold on for a moment while we get the details of the damaged glass"
-      },
-        {
-          "type": 4,
-          "platform": "facebook",
-          "payload":{
-          "facebook":{
+      "speech": "",
+    "displayText": "",
+    "messages": [{
+        "type": 4,
+        "platform": "facebook",
+        "payload":{
+        "facebook":{
           "text": "Can you validate the type of window? You can select another one if the suggested window type is not correct",
           "quick_replies": [
             {
@@ -576,7 +583,7 @@ app.post("/fulfillment", async function (req, res) {
             "platform": "facebook",
             "payload":{
             "facebook":{
-            "text": "Input the correct size of the glass; eg- Height (in cm) x Width (in cm) x Thickness (in mm)",
+            "text": "Select the correct size of the glass or enter as Height (inch) x Width (inch) x Thickness (mm)",
             "quick_replies": [
               {
                 "content_type":"text",
