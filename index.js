@@ -769,33 +769,15 @@ app.post("/fulfillment", async function (req, res) {
     };
     return res.json(msg);
     } 
-  else if(intentFrom === 'input.OtherOptionRes') {
+  else if(intentFrom === 'input.Cash_10') {
     msg = {
-      "speech": "",
-      "displayText": "",
-      "messages": [{  
-      "type":4,
-      "platform":"facebook",
-      "payload":{
-        "facebook":{
-          "text":"Please select an option for us to proceed further",
-          "quick_replies_img":[{
-            "content_type":"text",
-            "title":"Cash Payment",
-            "payload":"Cash Payment"
-          },{
-            "content_type":"text",
-            "title":"Repair",
-            "payload":"Repair"
-          },{
-            "content_type":"text",
-            "title":"Self Quotes",
-            "payload":"Self Quotes"
-          }]
-        }
-      }
-    }
-    ]};
+      "speech": "",
+      "displayText": "",
+      "messages": [{
+      "type": 0,
+      "platform": "facebook",
+      "speech": "Excellent! We'll initiate the wire transfer of this amount into your bank account, <br><br>associated with our records, within 24 hours"
+      }]};
     return res.json(msg);
   }
   
