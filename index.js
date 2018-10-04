@@ -103,6 +103,9 @@ var thickness;
 var glassType;
 var windowType;
 var gSize; 
+var h; 
+var w; 
+var t; 
 
 function checkItem(query,message){
   message.messages[0].payload.facebook.quick_replies.forEach((item) => {
@@ -125,9 +128,9 @@ async function priceConverter(req,res){
      'cache-control': 'no-cache',
      'content-type': 'application/json' },
   body: 
-   { height: 70,
-     width: 30,
-     thickness: 33,
+   { height: h,
+     width: w,
+     thickness: t,
      glassType: glassType,
      windowType: windowType},
   json: true };
@@ -598,6 +601,9 @@ app.post("/fulfillment", async function (req, res) {
 
   else if(intentFrom === 'input.GlassSize') {
     gSize=intentParam.GlassSize;
+    h =intentParam.number1;
+    w =intentParam.number2;
+    t =intentParam.number3;
     console.log(gSize);
          
     await CreateClaim(req,res).then(async (claimno) => {
