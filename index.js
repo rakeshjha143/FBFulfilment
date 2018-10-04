@@ -692,7 +692,7 @@ app.post("/fulfillment", async function (req, res) {
                              "messages": [{
                               "type": 0,
                               "platform": "facebook",
-                              "speech": "Your Claim number is CL  <p style=color:red;">+claimno+'</p>'
+                              "speech": "Your Claim number is CL  "+claimno
                             },{
                               "type": 0,
                               "platform": "facebook",
