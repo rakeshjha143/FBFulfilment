@@ -44,45 +44,7 @@ const readFileSession = filePath => new Promise((resolve, reject) => {
     else resolve(data);
   });
 });
-app.post("/updatesession", async function (req, res) {
-  console.log(req.body.sessionID);
-  try {
-    readFileSession('sessionID.json').then(async function (file) {
-      console.log("--------file-------------");
-      console.log(file);
-      if (file) {
-        let data = JSON.parse(file);
-        console.log("---------------data------------------");
-        console.log(data);
-        let obj = data.find(x => x.sessionID === req.body.sessionID);
-        let index = data.indexOf(obj);
-        console.log("-------------index--------------------");
-        console.log(index);
-        if (index == -1) {
-          data.push({ "type": req.body.type, "sessionID": req.body.sessionID });
-          await fs.writeFile("sessionID.json", JSON.stringify(data), { encodig: "utf8" }, function () { })
-        }
-        else {
-          data[index]["type"] = req.body.type;
-          await fs.writeFile("sessionID.json", JSON.stringify(data), { encodig: "utf8" }, function () { })
-        }
 
-      }
-      else {
-        await fs.writeFile("sessionID.json", JSON.stringify([{ "type": req.body.type, "sessionID": req.body.sessionID }]), { encodig: "utf8" }, function () {
-
-        })
-      }
-
-    }).catch(function (err) {
-      console.log(err)
-    });
-
-  }
-
-  catch (err) { console.error(err) }
-  res.send(req.body.sessionID);
-});
 //GET Endpoint
 var getDetails;
 var newQuoteobj = '';
@@ -781,31 +743,36 @@ app.post("/fulfillment", async function (req, res) {
       }]};
     return res.json(msg);
   }
+  else if(intentFrom === 'input.cancel') {
+    msg={
+    "speech": "",
+    "displayText": "",
+    "messages": [{
+      "type": 4,
+      "platform": "facebook",
+      "payload":{
+      "facebook":{
+      "text": "Here is a quick reply!",
+      "quick_replies_img":[{
+        "content_type":"text",
+        "title":"Search",
+        "payload":"<POSTBACK_PAYLOAD>",
+        "image_url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgEvw56_-w2K-Ml7Zc1gF5yXCWK02eOffT5uw6DkQzzGo230Dq_g"
+      }]}}
+
+}
   
+  ]
+
+    };
+    return res.json(msg);
+    } 
 });
 //POST Call Endpoint
 
 
 
-app.get("/test", async function (req, res) {
-  var type = 'GETPLAN';
-  commonFiles.getServiceNowIncidents(type, 'u_name=Mukil', function (error, data) {
-    console.log('data', data);
-    var SRID = data.result[0].u_number;
-    var status = data.result[0].u_status;
-    var msg = '';
-    msg = {
-      "speech": "",
-      "displayText": "",
-      "messages": [{
-        "type": 0,
-        "platform": "facebook",
-        "speech": "Good Morning Mukil! Your request for inspection(" + SRID + ")is " + status + ". The inspection will be completed within the next 4 hrs. Is there anything else i can help you with?"
-      }]
-    };
-    return res.json(msg);
-  });
-});
+
 var sendMail = function (mailAddress, data) {
   let mailSubject = '', messageContent = '';
   console.log('Sending Mail...');
