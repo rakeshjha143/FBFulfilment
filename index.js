@@ -745,15 +745,14 @@ app.post("/fulfillment", async function (req, res) {
   }
   else if(intentFrom === 'input.cancel') {
     msg={
-    "speech": "",
-    "displayText": "",
+   
     "messages": [{
       "type": 4,
       "platform": "facebook",
       "payload":{
       "facebook":{
       "text": "Here is a quick reply!",
-      "quick_replies_img":[{
+      "quick_replies":[{
         "content_type":"text",
         "title":"Search",
         "payload":"<POSTBACK_PAYLOAD>",
