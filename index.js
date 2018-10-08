@@ -179,6 +179,7 @@ requestAPI(options, function (error, response, body) {
 app.post("/fulfillment", async function (req, res) {
 
   // Service now status
+  console.log("Rakesh jha");
   console.log("req", req);
   console.log("body", JSON.stringify(req.body));
   console.log(JSON.stringify(req.body.result.action));
