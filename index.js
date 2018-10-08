@@ -197,7 +197,7 @@ app.post("/fulfillment", async function (req, res) {
   var msg = '';
  
   
-  if (intentFrom === 'input.claimwelcome' ) {
+  if (intentFrom === 'input.welcome' ) {
     msg = {
       "speech": "",
       "displayText": "",
@@ -216,9 +216,18 @@ app.post("/fulfillment", async function (req, res) {
             },
             {
               "content_type":"text",
-              "title":"Underwriting",
-              "payload":"Underwriting"
-               }
+              "title":"Policy Change",
+              "payload":"Policy Change"
+               },
+               {
+                "content_type":"text",
+                "title":"Renewal",
+                "payload":"Renewal"
+                 },{
+                  "content_type":"text",
+                  "title":"Quote",
+                  "payload":"Quote"
+                   }
           ]
           }
         }
@@ -244,7 +253,7 @@ app.post("/fulfillment", async function (req, res) {
           }
     return res.json(msg);
   }
-  else if (intentFrom === 'input.welcome' ) {
+  else if (intentFrom === 'input.Claim02' ) {
     msg = {
       "speech": "",
       "displayText": "",
@@ -254,16 +263,27 @@ app.post("/fulfillment", async function (req, res) {
         "platform":"facebook",
         "payload":{
           "facebook":{
-            "text":"Do you want to make a claim for your glass breakage ?",
-            "quick_replies":[{
+            "text":"What do you want to Claim for?",
+            "quick_replies":[
+              {
+                "content_type":"text",
+                "title":"Applicance Breakdown",
+                "payload":"Applicance Breakdown"
+              },
+              {
               "content_type":"text",
-              "title":"Yes",
-              "payload":"Yes"
+              "title":"Glass Breakage",
+              "payload":"Glass Breakage"
             },
             {
               "content_type":"text",
-              "title":"No",
-              "payload":"No"
+              "title":"Water Leakage",
+              "payload":"Water Leakage"
+            },
+            {
+              "content_type":"text",
+              "title":"Theft",
+              "payload":"Theft"
             }
           ]
           }
@@ -271,7 +291,7 @@ app.post("/fulfillment", async function (req, res) {
       }
     ]};
     return res.json(msg);
-  } else if(intentFrom === 'input.glassClaim') {
+  } else if(intentFrom === 'input.ChooseClaim') {
     msg = {
       "speech": "",
       "displayText": "",
@@ -285,7 +305,7 @@ app.post("/fulfillment", async function (req, res) {
         "platform":"facebook",
         "payload":{
           "facebook":{
-            "text":"Is it related to glass claim to your Auto, Home or Businessowners policy?",
+            "text":"Is the Claim related to your Auto, Home or Businessowners policy?",
             "quick_replies_img":[{
               "content_type":"text",
               "title":"Auto",
@@ -908,6 +928,7 @@ else if(intentFrom === 'queryType'){
 }
 else if(intentFrom === 'queryTypeMoreDetails'){
   QueryType=intentParam.queryType;
+  console.log(QueryType);
   msg = { "messages": [
     {
     "type": 0,
