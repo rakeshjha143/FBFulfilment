@@ -248,7 +248,7 @@ app.post("/fulfillment", async function (req, res) {
       "messages": [{
         "type": 0,
         "platform": "facebook",
-        "speech": "Hello, I'm Macy!<br><br>How can I help you today?<br><br>Enter your question below and I'll help you find the information you need."
+        "speech": "Hi There, I'm Macy,!<br><br>your friendly Quote Assistant. How can I help you today?"
       }]
           }
     return res.json(msg);
@@ -898,29 +898,42 @@ app.post("/fulfillment", async function (req, res) {
     }
 
 else if(intentFrom === 'queryType'){
-  msg = {
+   msg = {
     "speech": "",
     "displayText": "",
     "messages":[
-     {
+    {
       "type":4,
       "platform":"facebook",
       "payload":{
         "facebook":{
           "text":"Oh yeah!  But before that can you confirm your query type",
-          "quick_replies_img":[{
-            "content_type":"text",
-            "title":"Risk Class",
-            "payload":"Risk Class"
-          },{
+          "quick_replies":[
+            {
+              "content_type":"text",
+              "title":"Risk Class",
+              "payload":"Risk Class"
+            },
+            {
             "content_type":"text",
             "title":"Deductible",
             "payload":"Deductible"
-          },{
+          },
+          {
             "content_type":"text",
             "title":"Discount",
             "payload":"Discount"
-          }]
+          },
+          {
+            "content_type":"text",
+            "title":"Coverage",
+            "payload":"Coverage"
+          }, {
+            "content_type":"text",
+            "title":"Others",
+            "payload":"Others"
+          }
+        ]
         }
       }
     }
