@@ -1007,63 +1007,7 @@ app.post("/fulfillment", async function (req, res) {
       return res.json(msg);
     }
 
-else if(intentFrom === 'queryType'){
-  msg = {
-    "messages": [
-   
-        {
-          "type": 4,
-          "platform": "facebook",
-          "payload":{
-          "facebook":{
-          "text": "Can you confirm your query type",
-          "quick_replies_img": [
-            {
-                          "content_type":"text",
-                          "title":"Risk Class",
-                          "payload":"Risk Class"
-                          
-              },{
-                "content_type":"text",
-                "title":"Deductible",
-                "payload":"Deductible"
-                
-    },
-    {
-      "content_type":"text",
-      "title":"Discount",
-      "payload":"Discount"
-      
-},
-{
-"content_type":"text",
-"title":"Coverage",
-"payload":"Coverage"
 
-},
-{
-"content_type":"text",
-"title":"Others",
-"payload":"Others"
-
-}
-            
-            ]}}
-    
-  }]};
-}
-else if(intentFrom === 'queryTypeMoreDetails'){
-  QueryType=intentParam.queryType;
-  console.log(QueryType);
-  msg = { "messages": [
-    {
-    "type": 0,
-    "platform": "facebook",
-    "speech": "Excellent! Can you please specify your query on "+ QueryType
-    }
-   ]};
-   return res.json(msg);
-}
 else if(intentFrom === 'riskClass'){
   RiskClass=intentParam.RiskClass;
   msg = {
