@@ -52,7 +52,9 @@ newQuoteobj = new commonFiles.newQuote();
 getDetails = new commonFiles.getDetails();
 var profileDetails = new commonFiles.profileDetails()
 var latestSN = new commonFiles.latestSN();
-  
+var QueryType; 
+var QueryTypeRisk; 
+var RiskClass
 var claimno;
 var lossDate;
 var lossType;
@@ -766,7 +768,329 @@ app.post("/fulfillment", async function (req, res) {
     };
     return res.json(msg);
     } 
+
+    // Bot to Call ...
+    else if (intentFrom === 'input.discount' ) {
+      msg = {
+        "messages": [
+          {
+          "type": 0,
+          "platform": "facebook",
+          "speech": "I am so sorry to hear that. Don't worry, I will help you out"
+          },
+          {
+            "type": 0,
+            "platform": "facebook",
+            "speech": "We usually offer discount based on the number of coverage sections selected"
+            },
+            {
+              "type": 0,
+              "platform": "facebook",
+              "speech": "Click here to refer the discount chart for more details"
+              },
+            {
+              "type": 4,
+              "platform": "facebook",
+              "payload":{
+              "facebook":{
+              "text": "Is there anything else I can help you with?",
+              "quick_replies": [
+                {
+                              "content_type":"text",
+                              "title":"Yes",
+                              "payload":"Yes"
+                              
+                  },{
+                    "content_type":"text",
+                    "title":"No",
+                    "payload":"No"
+                    
+        }
+                
+                ]}}
+        
+      }]};
+      return res.json(msg);
+    }
+
+
+    else if (intentFrom === 'input.discount.discount-yes' ) {
+      msg = {
+        "messages": [
+       
+            {
+              "type": 4,
+              "platform": "facebook",
+              "payload":{
+              "facebook":{
+              "text": "Can you confirm your query type",
+              "quick_replies_img": [
+                {
+                              "content_type":"text",
+                              "title":"Risk Class",
+                              "payload":"Risk Class"
+                              
+                  },{
+                    "content_type":"text",
+                    "title":"Deductible",
+                    "payload":"Deductible"
+                    
+        },
+        {
+          "content_type":"text",
+          "title":"Discount",
+          "payload":"Discount"
+          
+},
+{
+  "content_type":"text",
+  "title":"Coverage",
+  "payload":"Coverage"
+  
+},
+{
+  "content_type":"text",
+  "title":"Others",
+  "payload":"Others"
+  
+}
+                
+                ]}}
+        
+      }]};
+      return res.json(msg);
+    }
+
+
+    else if (intentFrom === 'discount.discount-yes.discount-yes-custom' ) {
+      QueryType=intentParam.queryType;
+
+      msg = {
+        "messages": [
+          {
+          "type": 0,
+          "platform": "facebook",
+          "speech": "Excellent! Can you please specify your query on "+ QueryType
+          }
+         ]};
+      return res.json(msg);
+    }
+
+else if(intentFrom === 'queryType'){
+  msg = {
+    "speech": "",
+    "displayText": "",
+    "messages":[
+     {
+      "type":4,
+      "platform":"facebook",
+      "payload":{
+        "facebook":{
+          "text":"Oh yeah!  But before that can you confirm your query type",
+          "quick_replies_img":[{
+            "content_type":"text",
+            "title":"Risk Class",
+            "payload":"Risk Class"
+          },{
+            "content_type":"text",
+            "title":"Deductible",
+            "payload":"Deductible"
+          },{
+            "content_type":"text",
+            "title":"Discount",
+            "payload":"Discount"
+          }]
+        }
+      }
+    }
+  ]};
+}
+else if(intentFrom === 'queryTypeMoreDetails'){
+  QueryType=intentParam.queryType;
+  msg = { "messages": [
+    {
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Excellent! Can you please specify your query on "+ QueryType
+    }
+   ]};
+   return res.json(msg);
+}
+else if(intentFrom === 'riskClass'){
+  RiskClass=intentParam.RiskClass;
+  msg = {
+     "messages": [
+    {
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Ah Ok Thanks! 🙂 For the BOP Policy , the risk class should be <b>Candy and Other Confectionery Products (chocolate confectionery)</b>"
+    },
+    {
+      "type": 4,
+      "platform": "facebook",
+      "payload":{
+      "facebook":{
+      "text": "Is there anything else I can help you with?",
+      "quick_replies": [
+        {
+                      "content_type":"text",
+                      "title":"Yes",
+                      "payload":"Yes"
+                      
+          },{
+            "content_type":"text",
+            "title":"No",
+            "payload":"No"
+            
+}
+        
+        ]}}
+
+}
+   ]};
+   return res.json(msg);
+}
+else if(intentFrom === 'riskClass.riskClass-yes'){
+  RiskClass=intentParam.RiskClass;
+  msg = {
+     "messages": [
+       {
+      "type": 4,
+      "platform": "facebook",
+      "payload":{
+      "facebook":{
+      "text": "Can you confirm your query type?",
+      "quick_replies_img": [
+        {
+                      "content_type":"text",
+                      "title":"Risk Class",
+                      "payload":"Risk Class"
+                      
+          },{
+            "content_type":"text",
+            "title":"Deductible",
+            "payload":"Deductible"
+            
+},{
+  "content_type":"text",
+  "title":"Discount",
+  "payload":"Discount"
+  
+},{
+  "content_type":"text",
+  "title":"Coverage",
+  "payload":"Coverage"
+  
+},{
+  "content_type":"text",
+  "title":"Others",
+  "payload":"Others"
+  
+}
+        
+        ]}}
+
+}
+   ]};
+   return res.json(msg);
+}
+else if(intentFrom === 'selectDeductible'){
+  msg={
+    "speech": "",
+    "displayText": "",
+    "messages": [
+      {
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Ah Sorry !!!"
+    },
+    {
+      "type": 0,
+      "platform": "facebook",
+      "speech": "I am unable to help you on this. Click here to conect with a senior underwriter or you can call your Agency Manager <b>Mr. John</b> @ <b>732 313 4444</b>"
+      },
+      {
+      "type": 4,
+      "platform": "facebook",
+      "payload":{
+      "facebook":{
+      "text": "Is there anything else I can help you with?",
+      "quick_replies":[{
+        "content_type":"text",
+        "title":"Yes",
+        "payload":"Yes"
+      },{
+        "content_type":"text",
+        "title":"No",
+        "payload":"No"
+      }]}}
+
+}
+  
+  ]
+
+    };
+   return res.json(msg);
+}
+else if(intentFrom === 'coverage.coverage-yes'){
+  RiskClass=intentParam.RiskClass;
+  msg = {
+     "messages": [
+       {
+      "type": 4,
+      "platform": "facebook",
+      "payload":{
+      "facebook":{
+      "text": "Can you confirm your query type?",
+      "quick_replies_img": [
+        {
+                      "content_type":"text",
+                      "title":"Risk Class",
+                      "payload":"Risk Class"
+                      
+          },{
+            "content_type":"text",
+            "title":"Deductible",
+            "payload":"Deductible"
+            
+},{
+  "content_type":"text",
+  "title":"Discount",
+  "payload":"Discount"
+  
+},{
+  "content_type":"text",
+  "title":"Coverage",
+  "payload":"Coverage"
+  
+},{
+  "content_type":"text",
+  "title":"Others",
+  "payload":"Others"
+  
+}
+        
+        ]}}
+
+}
+   ]};
+   return res.json(msg);
+}
+else if(intentFrom === 'coverage.coverage-yes.coverage-yes-custom'){
+  QueryType=intentParam.queryType;
+  msg = { "messages": [
+    {
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Excellent! Can you please specify your query on "+ QueryType
+    }
+   ]};
+   return res.json(msg);
+}
 });
+
+
+
 //POST Call Endpoint
 
 
