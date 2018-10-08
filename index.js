@@ -812,7 +812,48 @@ app.post("/fulfillment", async function (req, res) {
         };
        return res.json(msg);
     }
-   
+    else if (intentFrom === 'input.discount' ) {
+      msg = {
+        "messages": [
+          {
+          "type": 0,
+          "platform": "facebook",
+          "speech": "I am so sorry to hear that. Don't worry, I will help you out"
+          },
+          {
+            "type": 0,
+            "platform": "facebook",
+            "speech": "We usually offer discount based on the number of coverage sections selected"
+            },
+            {
+              "type": 0,
+              "platform": "facebook",
+              "speech": "Click here to refer the discount chart for more details"
+              },
+            {
+              "type": 4,
+              "platform": "facebook",
+              "payload":{
+              "facebook":{
+              "text": "Is there anything else I can help you with?",
+              "quick_replies": [
+                {
+                              "content_type":"text",
+                              "title":"Yes",
+                              "payload":"Yes"
+                              
+                  },{
+                    "content_type":"text",
+                    "title":"No",
+                    "payload":"No"
+                    
+        }
+                
+                ]}}
+        
+      }]};
+      return res.json(msg);
+    }
 
 
     else if (intentFrom === 'input.discount.discount-yes' ) {
@@ -861,7 +902,43 @@ app.post("/fulfillment", async function (req, res) {
       }]};
       return res.json(msg);
     }
-   
+    else if (intentFrom === 'higherDeductible' ) {
+      msg = {
+        "messages": [
+          {
+          "type": 0,
+          "platform": "facebook",
+          "speech": "Alright! First save your quote with standard deductible of 100 $. You can then chose the option <br><br>of voluntary deductible and select the deductible amount from the options in the list and then <br><br>generate premium"
+          },
+          {
+            "type": 0,
+            "platform": "facebook",
+            "speech": "Higher the deductible amount selected, lower will be the premium amount"
+            },
+             {
+              "type": 4,
+              "platform": "facebook",
+              "payload":{
+              "facebook":{
+              "text": "Is there anything else I can help you with?",
+              "quick_replies": [
+                {
+                              "content_type":"text",
+                              "title":"Yes",
+                              "payload":"Yes"
+                              
+                  },{
+                    "content_type":"text",
+                    "title":"No",
+                    "payload":"No"
+                    
+        }
+                
+                ]}}
+        
+      }]};
+      return res.json(msg);
+    }
     else if (intentFrom === 'higherDeductible.higherDeductible-yes' ) {
       msg={
         "speech": "",
@@ -903,9 +980,68 @@ app.post("/fulfillment", async function (req, res) {
       return res.json(msg);
     }
 
- 
+    else if(intentFrom === 'higherDeductible.higherDeductible-yes.higherDeductible-yes-custom'){
+      QueryType=intentParam.queryType;
+      console.log(QueryType);
+      msg = { "messages": [
+        {
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Excellent! Can you please specify your query on "+ QueryType
+        }
+       ]};
+       return res.json(msg);
+    }
+
+    else if (intentFrom === 'discount.discount-yes.discount-yes-custom' ) {
+      QueryType=intentParam.queryType;
+
+      msg = {
+        "messages": [
+          {
+          "type": 0,
+          "platform": "facebook",
+          "speech": "Excellent! Can you please specify your query on "+ QueryType
+          }
+         ]};
+      return res.json(msg);
+    }
 
 
+else if(intentFrom === 'riskClass'){
+  RiskClass=intentParam.RiskClass;
+  msg = {
+     "messages": [
+    {
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Ah Ok Thanks! 🙂 For the BOP Policy , the risk class should be <b>Candy and Other Confectionery Products (chocolate confectionery)</b>"
+    },
+    {
+      "type": 4,
+      "platform": "facebook",
+      "payload":{
+      "facebook":{
+      "text": "Is there anything else I can help you with?",
+      "quick_replies": [
+        {
+                      "content_type":"text",
+                      "title":"Yes",
+                      "payload":"Yes"
+                      
+          },{
+            "content_type":"text",
+            "title":"No",
+            "payload":"No"
+            
+}
+        
+        ]}}
+
+}
+   ]};
+   return res.json(msg);
+}
 else if(intentFrom === 'riskClass.riskClass-yes'){
   RiskClass=intentParam.RiskClass;
   msg = {
@@ -950,7 +1086,44 @@ else if(intentFrom === 'riskClass.riskClass-yes'){
    ]};
    return res.json(msg);
 }
+else if(intentFrom === 'selectDeductible'){
+  msg={
+    "speech": "",
+    "displayText": "",
+    "messages": [
+      {
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Ah Sorry !!!"
+    },
+    {
+      "type": 0,
+      "platform": "facebook",
+      "speech": "I am unable to help you on this. Click here to conect with a senior underwriter or you can call your Agency Manager <b>Mr. John</b> @ <b>732 313 4444</b>"
+      },
+      {
+      "type": 4,
+      "platform": "facebook",
+      "payload":{
+      "facebook":{
+      "text": "Is there anything else I can help you with?",
+      "quick_replies":[{
+        "content_type":"text",
+        "title":"Yes",
+        "payload":"Yes"
+      },{
+        "content_type":"text",
+        "title":"No",
+        "payload":"No"
+      }]}}
 
+}
+  
+  ]
+
+    };
+   return res.json(msg);
+}
 else if(intentFrom === 'coverage.coverage-yes'){
   RiskClass=intentParam.RiskClass;
   msg = {
@@ -995,8 +1168,18 @@ else if(intentFrom === 'coverage.coverage-yes'){
    ]};
    return res.json(msg);
 }
-
-else if(intentFrom === 'input.queryType'){
+else if(intentFrom === 'coverage.coverage-yes.coverage-yes-custom'){
+  QueryType=intentParam.queryType;
+  msg = { "messages": [
+    {
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Excellent! Can you please specify your query on "+ QueryType
+    }
+   ]};
+   return res.json(msg);
+}
+else if(intentFrom === 'queryType'){
   console.log(intentFrom === 'queryType');
   msg = {
     "messages": [
@@ -1042,7 +1225,18 @@ else if(intentFrom === 'input.queryType'){
     
   }]};
 }
-
+else if(intentFrom === 'queryTypeMoreDetails'){
+  QueryType=intentParam.queryType;
+  console.log(QueryType);
+  msg = { "messages": [
+    {
+    "type": 0,
+    "platform": "facebook",
+    "speech": "Excellent! Can you please specify your query on "+ QueryType
+    }
+   ]};
+   return res.json(msg);
+}
 });
 
 
