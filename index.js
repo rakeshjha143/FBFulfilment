@@ -1179,7 +1179,7 @@ else if(intentFrom === 'coverage.coverage-yes.coverage-yes-custom'){
    ]};
    return res.json(msg);
 }
-else if(intentFrom === 'queryType'){
+else if(intentFrom === 'input.queryType'){
   console.log(intentFrom === 'queryType');
   msg = {
     "messages": [
