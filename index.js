@@ -881,7 +881,96 @@ app.post("/fulfillment", async function (req, res) {
       }]};
       return res.json(msg);
     }
+    else if (intentFrom === 'higherDeductible' ) {
+      msg = {
+        "messages": [
+          {
+          "type": 0,
+          "platform": "facebook",
+          "speech": "Alright! First save your quote with standard deductible of 100 $. You can then chose the option <br><br>of voluntary deductible and select the deductible amount from the options in the list and then <br><br>generate premium"
+          },
+          {
+            "type": 0,
+            "platform": "facebook",
+            "speech": "Higher the deductible amount selected, lower will be the premium amount"
+            },
+             {
+              "type": 4,
+              "platform": "facebook",
+              "payload":{
+              "facebook":{
+              "text": "Is there anything else I can help you with?",
+              "quick_replies": [
+                {
+                              "content_type":"text",
+                              "title":"Yes",
+                              "payload":"Yes"
+                              
+                  },{
+                    "content_type":"text",
+                    "title":"No",
+                    "payload":"No"
+                    
+        }
+                
+                ]}}
+        
+      }]};
+      return res.json(msg);
+    }
+    else if (intentFrom === 'higherDeductible.higherDeductible-yes' ) {
+      msg={
+        "speech": "",
+        "displayText": "",
+        "messages": [{
+          "type": 4,
+          "platform": "facebook",
+          "payload":{
+          "facebook":{
+          "text": "Can you confirm your query type",
+          "quick_replies_img":[{
+            "content_type":"text",
+            "title":"Risk Class",
+            "payload":"Risk Class"
+          },{
+            "content_type":"text",
+            "title":"Deductible",
+            "payload":"Deductible"
+          },{
+            "content_type":"text",
+            "title":"Discount",
+            "payload":"Discount"
+          },{
+            "content_type":"text",
+            "title":"Coverage",
+            "payload":"Coverage"
+          },{
+            "content_type":"text",
+            "title":"Others",
+            "payload":"Others"
+          }
+        ]}}
+    
+    }
+      
+      ]
+    
+        };
+      return res.json(msg);
+    }
 
+    else if(intentFrom === 'higherDeductible.higherDeductible-yes.higherDeductible-yes-custom'){
+      QueryType=intentParam.queryType;
+      console.log(QueryType);
+      msg = { "messages": [
+        {
+        "type": 0,
+        "platform": "facebook",
+        "speech": "Excellent! Can you please specify your query on "+ QueryType
+        }
+       ]};
+       return res.json(msg);
+    }
 
     else if (intentFrom === 'discount.discount-yes.discount-yes-custom' ) {
       QueryType=intentParam.queryType;
