@@ -1299,6 +1299,86 @@ app.post("/fulfillment", async function (req, res) {
     };
     return res.json(msg);
   }
+
+else if(intentFrom === 'input.Renewal') {
+  msg = {
+    "speech": "",
+    "displayText": "",
+    "messages": [
+      {
+        "type": 4,
+        "platform": "facebook",
+        "payload": {
+          "facebook": {
+            "text": "What do you need assitance with?",
+            "quick_replies": [{
+              "content_type": "text",
+              "title": "Claims",
+              "payload": "Claims"
+
+            },
+            {
+              "content_type": "text",
+              "title": "Policy Change",
+              "payload": "Policy Change"
+            },
+            {
+              "content_type": "text",
+              "title": "Renewal",
+              "payload": "Renewal"
+            }, {
+              "content_type": "text",
+              "title": "Quote",
+              "payload": "Quote"
+            }
+            ]
+          }
+        }
+      }
+    ]
+  };
+  return res.json(msg);
+}
+else if(intentFrom === 'input.PolicyChange') {
+  msg = {
+    "speech": "",
+    "displayText": "",
+    "messages": [
+      {
+        "type": 4,
+        "platform": "facebook",
+        "payload": {
+          "facebook": {
+            "text": "What do you need assitance with?",
+            "quick_replies": [{
+              "content_type": "text",
+              "title": "Claims",
+              "payload": "Claims"
+
+            },
+            {
+              "content_type": "text",
+              "title": "Policy Change",
+              "payload": "Policy Change"
+            },
+            {
+              "content_type": "text",
+              "title": "Renewal",
+              "payload": "Renewal"
+            }, {
+              "content_type": "text",
+              "title": "Quote",
+              "payload": "Quote"
+            }
+            ]
+          }
+        }
+      }
+    ]
+  };
+  return res.json(msg);
+}
+   
 });
 
 
