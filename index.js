@@ -995,7 +995,7 @@ app.post("/fulfillment", async function (req, res) {
 
     else if (intentFrom === 'discount.discount-yes.discount-yes-custom' ) {
       QueryType=intentParam.queryType;
-
+      console.log(QueryType);
       msg = {
         "messages": [
           {
@@ -1179,8 +1179,8 @@ else if(intentFrom === 'coverage.coverage-yes.coverage-yes-custom'){
    ]};
    return res.json(msg);
 }
-else if(intentFrom === 'queryType'){
-  console.log(intentFrom === 'queryType');
+else if(intentFrom === 'input.queryType'){
+  console.log(intentFrom === 'input.queryType');
   msg = {
     "messages": [
    
