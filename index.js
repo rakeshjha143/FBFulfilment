@@ -1240,7 +1240,7 @@ app.post("/fulfillment", async function (req, res) {
     return res.json(msg);
   }
   else if (intentFrom === 'input.querytype') {
-    console.log(intentFrom === 'queryType');
+    //console.log(intentFrom === 'queryType');
     msg = {
       "messages": [
 
@@ -1287,6 +1287,8 @@ app.post("/fulfillment", async function (req, res) {
 
         }]
     };
+    
+    return res.json(msg);
   }
   else if (intentFrom === 'queryTypeMoreDetails') {
     QueryType = intentParam.queryType;
