@@ -251,18 +251,13 @@ app.post("/fulfillment", async function (req, res) {
   }
   else if (intentFrom === 'input.Underwriting') {
     msg = {
-      // "messages": [
-      //   {
-      //     "type": 0,
-      //     "platform": "facebook",
-      //     "speech": "Hello, I'm Macy!<br><br>How can I help you today?<br><br>Enter your question below and I'll help you find the information you need."
-      //      }]
+    
       "speech": "",
       "displayText": "",
       "messages": [{
         "type": 0,
         "platform": "facebook",
-        "speech": "Hi There, I'm Macy,!<br><br>your friendly Quote Assistant. How can I help you today?"
+        "speech": "Hi There, I'm Macy,! Your friendly Quote Assistant. How can I help you today?"
       }]
     }
     return res.json(msg);
