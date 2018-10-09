@@ -257,7 +257,7 @@ app.post("/fulfillment", async function (req, res) {
       "messages": [{
         "type": 0,
         "platform": "facebook",
-        "speech": "Hi There, I'm Macy,! Your friendly Quote Assistant. How can I help you today?"
+        "speech": "Hi There, I'm Macy! Your friendly Quote Assistant. How can I help you today?"
       }]
     }
     return res.json(msg);
